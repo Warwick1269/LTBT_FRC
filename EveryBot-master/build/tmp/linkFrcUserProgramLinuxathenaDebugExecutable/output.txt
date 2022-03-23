@@ -1,0 +1,4 @@
+See file:///D:/2021/WA%20Robotics%20Comp/EveryBot-master/build/tmp/linkFrcUserProgramLinuxathenaDebugExecutable/output.txt for all output for linkFrcUserProgramLinuxathenaDebugExecutable.
+linking frcUserProgram successful.
+
+Finished linkFrcUserProgramLinuxathenaDebugExecutable, see full log file:///D:/2021/WA%20Robotics%20Comp/EveryBot-master/build/tmp/linkFrcUserProgramLinuxathenaDebugExecutable/output.txt.

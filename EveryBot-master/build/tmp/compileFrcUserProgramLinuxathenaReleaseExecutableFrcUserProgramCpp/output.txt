@@ -1,0 +1,4 @@
+See file:///D:/2021/WA%20Robotics%20Comp/EveryBot-master/build/tmp/compileFrcUserProgramLinuxathenaReleaseExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramLinuxathenaReleaseExecutableFrcUserProgramCpp.
+compiling Robot.cpp successful.
+
+Finished compileFrcUserProgramLinuxathenaReleaseExecutableFrcUserProgramCpp, see full log file:///D:/2021/WA%20Robotics%20Comp/EveryBot-master/build/tmp/compileFrcUserProgramLinuxathenaReleaseExecutableFrcUserProgramCpp/output.txt.
