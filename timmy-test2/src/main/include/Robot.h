@@ -28,16 +28,18 @@ class Robot : public frc::TimedRobot {
  private:
 
 	// Left
-	frc::Spark frontL{0};
-	frc::Spark backL{1};
+	frc::Spark frontL{1};
+	frc::Spark backL{2};
 
 	// Right
-	frc::Spark frontR{2};
-	frc::Spark backR{3};
+	frc::Spark frontR{3};
+	frc::Spark backR{4};
 
-	frc::Spark flooper{4};
-	frc::Spark spinner{5};
-	frc::Spark climber{6};
+    // controlling
+	frc::Spark intake{5};
+	frc::Spark load{6};
+	frc::Spark spinner{7};
+    
 
 	frc::Joystick controller{0};
 };

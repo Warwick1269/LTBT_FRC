@@ -9,7 +9,7 @@
 #include <chrono>
 #include <thread>
 
-#include <frc/smartdashboard/SmartDashboard.h>
+// #include <frc/smartdashboard/SmartDashboard.h>
 
 
 double deadzone = 0.01;
@@ -17,7 +17,7 @@ double triggerDeadzone = 0.01;
 double maxSpeed = 0.6;
 bool lock = false;
 void Robot::RobotInit() {
-	std::cout << "-- CJ Robot Program Start --" << std::endl;
+	std::` << "-- CJ Robot Program Start --" << std::endl;
 }
 
 void Robot::RobotPeriodic() {}

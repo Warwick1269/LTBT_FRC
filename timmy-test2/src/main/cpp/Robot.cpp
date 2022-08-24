@@ -3,15 +3,18 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "Robot.h"
-
+#include <chrono>
+#include <thread>
 #include <iostream>
 #include <math.h>
 
 #include <frc/smartdashboard/SmartDashboard.h>
-
+// Variables:
 double deadzone = 0.01;
 double triggerDeadzone = 0.01;
 double maxSpeed = 0.6;
+bool Shoot_toggle = false;//moved up here
+
 
 void Robot::RobotInit() {
 	std::cout << "-- CJ Robot Program Start --" << std::endl;
@@ -19,22 +22,49 @@ void Robot::RobotInit() {
 
 void Robot::RobotPeriodic() {}
 
-void Robot::AutonomousInit() {}
+void Robot::AutonomousInit() {
+	
 
-void Robot::AutonomousPeriodic() {}
+}
+
+void Robot::AutonomousPeriodic() {
+	using namespace std::this_thread;     // sleep_for, sleep_until
+    using namespace std::chrono_literals; // ns, us, ms, s, h, etc.
+    using std::chrono::system_clock;
+	using namespace std::this_thread; // sleep_for, sleep_until
+    using namespace std::chrono; // nanoseconds, system_clock, seconds
+
+	frontL.Set(-1);
+	backL.Set(1);
+	sleep_for(seconds(10)); // nanoseconds changed to seconds.
+	frontL.Set(0);
+	backL.Set(0);
+	spinner.Set(0.5);
+	load.Set(1);
+	sleep_for(seconds(3)); // nanoseconds changed to seconds.
+	spinner.Set(0);
+	load.Set(0);  
+						
+
+}
 
 void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic() {
+	using namespace std::this_thread;     // sleep_for, sleep_until
+    using namespace std::chrono_literals; // ns, us, ms, s, h, etc.
+    using std::chrono::system_clock;
+	using namespace std::this_thread; // sleep_for, sleep_until
+    using namespace std::chrono; // nanoseconds, system_clock, seconds
 	double leftJoy = -controller.GetRawAxis(1);
 	double rightJoy = controller.GetRawAxis(3);
 
 	// double leftPower = pow(leftJoy, 3);
 	// double rightPower = pow(rightJoy, 3);
 
+
 	double leftPower = leftJoy * fabs(leftJoy);
 	double rightPower = rightJoy * fabs(rightJoy);
-
 	// leftPower *= maxSpeed;
 	// rightPower *= maxSpeed;
 
@@ -54,14 +84,15 @@ void Robot::TeleopPeriodic() {
 		}
 	}
 
-	int leftTrigger = controller.GetRawButton(1);
-	int rightTrigger = controller.GetRawButton(3);
+	int LeftBumper = controller.GetRawButton(5);
+	int rightBumper = controller.GetRawButton(6);
 
 	int yButton = controller.GetRawButton(4);
 	int aButton = controller.GetRawButton(2);
+	int xButton = controller.GetRawButton(1);
 
-	int lBumper = controller.GetRawButton(5);
-	int rBumper = controller.GetRawButton(6);
+	//int lShoot = controller.GetRawButton(5);
+	//int rShoot = controller.GetRawButton(6);
 
 	// Left drivetrain
 	if (fabs(leftJoy) > deadzone) {
@@ -71,7 +102,6 @@ void Robot::TeleopPeriodic() {
 		frontL.Set(0);
 		backL.Set(0);
 	}
-
 	// right drivetrain
 	if (fabs(rightJoy) > deadzone) {
 		frontR.Set(rightPower);
@@ -80,34 +110,54 @@ void Robot::TeleopPeriodic() {
 		frontR.Set(0);
 		backR.Set(0);
 	}
-
-	// Flooper
-	if (leftTrigger != 0) {
-		flooper.Set(1);
-	} else if (rightTrigger != 0) {
-		flooper.Set(-1);
+	// intake  
+	if (LeftBumper != 0) {
+		intake.Set(1);
+	} else if (rightBumper != 0) {
+		intake.Set(-1);
 	} else {
-		flooper.Set(0);
+		intake.Set(0);
 	}
+	int buttonState;
+	int lastButtonState;
+	// read the pushbutton input pin:
+  	buttonState = aButton;
 
-
-	// spinner
-	if (rBumper != 0) {
+  // compare the buttonState to its previous state
+  if (buttonState != lastButtonState) {
+    // if the state has changed, increment the counter
+    if (Shoot_toggle != true) {
+		Shoot_toggle = true;
+	}
+	sleep_for(milliseconds(500));
+	if (Shoot_toggle != false) {
+		Shoot_toggle = false;
+	}
+    // Delay a little bit to avoid bouncing
+    sleep_for(milliseconds(50));
+  }
+  // save the current state as the last state, for next time through the loop
+  lastButtonState = buttonState; //have to test this code to know if it works.
+	// spinner be shoot
+	// make toggle-able [ ]
+	//A turns the spinner on when pressed, then turns it off when pressed again
+	// have two separate if statments, one takes an input from the controller setting SHoot_toggle 'true' and the other reads Shoot_toggle stting the 'spinner's' speed
+	if (Shoot_toggle) {
 		spinner.Set(0.5);
-	} else if (lBumper != 0) {
-		spinner.Set(-0.5);
-	} else {
+	}
+	else {
 		spinner.Set(0);
 	}
+	
 
 
-	// climber
+	// load
 	if (yButton != 0) {
-		climber.Set(1);
-	} else if (aButton != 0) {
-		climber.Set(-1);
+		load.Set(1);
+	} else if (xButton != 0) {
+		load.Set(-1);
 	} else {
-		climber.Set(0);
+		load.Set(0);
 	}
 }
 
