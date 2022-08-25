@@ -16,6 +16,8 @@ double deadzone = 0.01;
 double triggerDeadzone = 0.01;
 double maxSpeed = 0.6;
 bool lock = false;
+double flyspeed = 0;
+
 void Robot::RobotInit() {
 	std::cout << "-- CJ Robot Program Start --" << std::endl;
 }
@@ -44,7 +46,7 @@ void Robot::AutonomousPeriodic() {
 		
 	flywheel.Set(1);
 
-	sleep_for(nanoseconds(1000000000)); // conversion is 1000,000,000n = 1s
+	sleep_for(nanoseconds(2000000000)); // conversion is 1000,000,000n = 1s
 	//delay 2 sec
 
 	feed.Set(0.9);
@@ -139,10 +141,13 @@ void Robot::TeleopPeriodic() {
 		feed.Set(0);
 	}
 
-
 	// flywheel
 	if (bButton !=0){//on
-		flywheel.Set(-1);
+		for (int i =0; i < 70; i++) {
+			flyspeed += -0.01;
+			flywheel.Set(flyspeed);
+		};
+		
 	} else if (xButton !=0) {//off
 		flywheel.Set(0);
 	}
