@@ -145,8 +145,8 @@ void Robot::TeleopPeriodic() {
 	if (bButton !=0){//on
 		for (int i =0; i < 100; i++) {
 			flyspeed += 0.01;
+			//sleep_for(nanoseconds(100000000));
 			flywheel.Set(-flyspeed);
-			//sleep_for(nanoseconds(1000000));
 		};
 		
 	} else if (xButton !=0) {//off
