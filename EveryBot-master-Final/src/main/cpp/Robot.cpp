@@ -132,9 +132,9 @@ void Robot::TeleopPeriodic() {
 
 	// feed wheel
 	if (rBumper != 0) {
-		feed.Set(-0.7);
-	} else if (lBumper != 0) {
 		feed.Set(0.7);
+	} else if (lBumper != 0) {
+		feed.Set(-0.7);
 	} else {
 		feed.Set(0);
 	}
