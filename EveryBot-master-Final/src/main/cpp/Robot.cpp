@@ -41,10 +41,10 @@ void Robot::AutonomousPeriodic() {
 	backL.Set(0);
 	frontR.Set(0);
 	backR.Set(0);
-
+		
 	flywheel.Set(1);
 
-	sleep_for(nanoseconds(2000000000)); // conversion is 1000,000,000n = 1s
+	sleep_for(nanoseconds(1000000000)); // conversion is 1000,000,000n = 1s
 	//delay 2 sec
 
 	feed.Set(0.9);
@@ -142,7 +142,7 @@ void Robot::TeleopPeriodic() {
 
 	// flywheel
 	if (bButton !=0){//on
-		flywheel.Set(-2);
+		flywheel.Set(-1);
 	} else if (xButton !=0) {//off
 		flywheel.Set(0);
 	}
