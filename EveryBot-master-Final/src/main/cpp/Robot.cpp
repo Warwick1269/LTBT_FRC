@@ -15,7 +15,7 @@
 double deadzone = 0.01;
 double triggerDeadzone = 0.01;
 double maxSpeed = 0.6;
-bool lock = false;
+// bool lock = false;
 double flyspeed = 0;
 
 void Robot::RobotInit() {
@@ -143,9 +143,10 @@ void Robot::TeleopPeriodic() {
 
 	// flywheel
 	if (bButton !=0){//on
-		for (int i =0; i < 1000; i++) {
-			flyspeed += 0.001;
+		for (int i =0; i < 100; i++) {
+			flyspeed += 0.01;
 			flywheel.Set(-flyspeed);
+			//sleep_for(nanoseconds(1000000));
 		};
 		
 	} else if (xButton !=0) {//off
