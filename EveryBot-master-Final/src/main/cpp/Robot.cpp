@@ -143,13 +143,14 @@ void Robot::TeleopPeriodic() {
 
 	// flywheel
 	if (bButton !=0){//on
-		for (int i =0; i < 70; i++) {
-			flyspeed += -0.01;
-			flywheel.Set(flyspeed);
+		for (int i =0; i < 1000; i++) {
+			flyspeed += 0.001;
+			flywheel.Set(-flyspeed);
 		};
 		
 	} else if (xButton !=0) {//off
 		flywheel.Set(0);
+		flyspeed = 0;
 	}
 	
 
