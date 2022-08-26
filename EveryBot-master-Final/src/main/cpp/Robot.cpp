@@ -55,7 +55,9 @@ void Robot::AutonomousPeriodic() {
 	
 }
 
-void Robot::TeleopInit() {}
+void Robot::TeleopInit() {
+	flyspeed = 0;
+}
 
 void Robot::TeleopPeriodic() {
 	double leftJoy = -controller.GetRawAxis(1);
