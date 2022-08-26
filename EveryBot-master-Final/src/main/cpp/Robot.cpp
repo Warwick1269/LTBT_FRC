@@ -90,6 +90,7 @@ void Robot::TeleopPeriodic() {
 
 	int xButton = controller.GetRawButton(3);
 	int bButton = controller.GetRawButton(2);
+	int yButton = controller.GetRawButton(4);
 
 	int lBumper = controller.GetRawButton(5);
 	int rBumper = controller.GetRawButton(6);
@@ -141,21 +142,39 @@ void Robot::TeleopPeriodic() {
 		feed.Set(0);
 	}
 	// flywheel
-	if (bButton !=0){//on
-		for (int i =0; i < 100; i++) {
-			flyspeed += 0.01;
-			flywheel.Set(-flyspeed);
-			sleep_for(nanoseconds(100000000));
-		};
-		
 
-	} else if (xButton !=0) {//off
+	if (xButton !=0){//on
+	for (int i =0; i < 75; i++) {
+		flyspeed += 0.01;
+		flywheel.Set(-flyspeed);
+		sleep_for(nanoseconds(100000000));
+		if (bButton !=0) {
+			break;
+		}
+	};
+
+	} 
+	else if (yButton !=0) {
+	for (int i =0; i < 30; i++) {
+		flyspeed += 0.01;
+		flywheel.Set(-flyspeed);
+		sleep_for(nanoseconds(100000000));
+		if (bButton !=0) {
+			break;
+		}
+	};
+			
+	}
+
+	else if (bButton !=0) {//off
 		flywheel.Set(0);
 		flyspeed = 0;
 	}
 	
 
 }
+
+
 
 void Robot::DisabledInit() {}
 
