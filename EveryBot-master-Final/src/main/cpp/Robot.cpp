@@ -151,7 +151,7 @@ void Robot::TeleopPeriodic() {
 		if (bButton !=0) {
 			break;
 		}
-		if (i == 75) {
+		if (flyspeed > 0.745) {
 			printf("Ready!");
 		}
 	};
@@ -165,7 +165,7 @@ void Robot::TeleopPeriodic() {
 		if (bButton !=0) {
 			break;
 		}
-		if (i == 30) {
+		if (flyspeed > 0.295) {
 			printf("Ready!");
 		}
 	};
