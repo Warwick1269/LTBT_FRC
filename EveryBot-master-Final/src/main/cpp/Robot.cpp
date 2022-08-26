@@ -151,6 +151,9 @@ void Robot::TeleopPeriodic() {
 		if (bButton !=0) {
 			break;
 		}
+		if (i == 75) {
+			printf("Ready!");
+		}
 	};
 
 	} 
@@ -161,6 +164,9 @@ void Robot::TeleopPeriodic() {
 		sleep_for(nanoseconds(100000000));
 		if (bButton !=0) {
 			break;
+		}
+		if (i == 30) {
+			printf("Ready!");
 		}
 	};
 			
