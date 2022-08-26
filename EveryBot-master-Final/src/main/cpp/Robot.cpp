@@ -44,12 +44,13 @@ void Robot::AutonomousPeriodic() {
 	frontR.Set(0);
 	backR.Set(0);
 		
-	flywheel.Set(1);
-
-	sleep_for(nanoseconds(2000000000)); // conversion is 1000,000,000n = 1s
-	//delay 2 sec
-
-	feed.Set(0.9);
+	for (int i =0; i < 75; i++) {
+		flyspeed += 0.01;
+		flywheel.Set(-flyspeed);
+		sleep_for(nanoseconds(100000000));
+	};
+	sleep_for(nanoseconds(75000000));
+	feed.Set(0.7);
 
 	
 }
