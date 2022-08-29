@@ -17,7 +17,9 @@ double triggerDeadzone = 0.01;
 double maxSpeed = 0.6;
 // bool lock = false;
 double flyspeed = 0;
-
+double feedspeed = 0.75;
+bool latch = true;
+double sens = 0.75;
 void Robot::RobotInit() {
 	std::cout << "-- CJ Robot Program Start --" << std::endl;
 }
@@ -30,38 +32,48 @@ void Robot::AutonomousPeriodic() {
 	using namespace std::this_thread;
 	using namespace std::chrono;
 	
-
+	if (latch == true) {
 	
 	frontL.Set(0.3);
 	backL.Set(0.3);
 	frontR.Set(-0.3);
 	backR.Set(-0.3);
+	lifter.Set(-0.7);
 
-	sleep_for(nanoseconds(1000000000));
+	sleep_for(nanoseconds(3000000000));
 	// delay 1 sec
 	frontL.Set(0);
 	backL.Set(0);
 	frontR.Set(0);
 	backR.Set(0);
+	lifter.Set(0);
 		
-	for (int i =0; i < 75; i++) {
+	for (int i =0; i < 90; i++) {
 		flyspeed += 0.01;
 		flywheel.Set(-flyspeed);
 		sleep_for(nanoseconds(100000000));
 	};
-	sleep_for(nanoseconds(75000000));
-	feed.Set(0.7);
+	sleep_for(nanoseconds());
+	feed.Set(feedspeed);
+	lifter.Set(-0.7);
 
-	
+	sleep_for(nanoseconds(700000000));
+	flyspeed = 0;
+	feed.Set(0);
+	flywheel.Set(0);
+	lifter.Set(0);
+	latch = false;
+
+	}
 }
 
 void Robot::TeleopInit() {
-	flyspeed = 0;
 }
 
 void Robot::TeleopPeriodic() {
-	double leftJoy = -controller.GetRawAxis(1);
-	double rightJoy = controller.GetRawAxis(5);
+	using namespace frc;
+	double leftJoy = -controller.GetRawAxis(1) * sens;
+	double rightJoy = controller.GetRawAxis(5) * sens;
 
 	// double leftPower = pow(leftJoy, 3);
 	// double rightPower = pow(rightJoy, 3);
@@ -102,20 +114,20 @@ void Robot::TeleopPeriodic() {
 
 	// Left drivetrain
 	if (fabs(leftJoy) > deadzone) {
-		frontL.Set(leftPower);
-		backL.Set(leftPower);
+		frontR.Set(leftPower);
+		backR.Set(leftPower);
 	} else {
-		frontL.Set(0);
-		backL.Set(0);
+		frontR.Set(0);
+		backR.Set(0);
 	}
 
 	// right drivetrain
 	if (fabs(rightJoy) > deadzone) {
-		frontR.Set(rightPower);
-		backR.Set(rightPower);
+		frontL.Set(rightPower);
+		backL.Set(rightPower);
 	} else {
-		frontR.Set(0);
-		backR.Set(0);
+		frontL.Set(0);
+		backL.Set(0);
 	}
 
 		
@@ -128,9 +140,9 @@ void Robot::TeleopPeriodic() {
  
 	
 	if (rightTrigger != 0) {
-		lifter.Set(0.9);
+		lifter.Set(-0.7);
 	} else if (leftTrigger != 0) {
-		lifter.Set(-0.9);
+		lifter.Set(0.7);
 	} else {
 		lifter.Set(0);
 	}
@@ -138,38 +150,40 @@ void Robot::TeleopPeriodic() {
 
 	// feed wheel
 	if (rBumper != 0) {
-		feed.Set(0.7);
+		feed.Set(feedspeed);
 	} else if (lBumper != 0) {
-		feed.Set(-0.7);
+		feed.Set(-feedspeed);
 	} else {
 		feed.Set(0);
 	}
 	// flywheel
 
-	if (yButton !=0){//on
-	for (int i =0; i < 75; i++) {
+	if (yButton !=0 && flyspeed <= 0.01){//on
+	for (int i =0; i < 100; i++) {
 		flyspeed += 0.01;
 		flywheel.Set(-flyspeed);
-		sleep_for(nanoseconds(100000000));
+		SmartDashboard::PutString("DB/String 0", "Spinning wheel");
+		sleep_for(nanoseconds(50000000));
+		if (flyspeed > 0.98) {
+			SmartDashboard::PutString("DB/String 0", "Ready!");
+		}
 		if (bButton !=0) {
 			break;
-		}
-		if (flyspeed > 0.745) {
-			printf("Ready!");
 		}
 	};
 
 	} 
-	else if (xButton !=0) {
-	for (int i =0; i < 30; i++) {
+	else if (xButton !=0 && flyspeed <= 0.01) {
+	for (int i =0; i < 60; i++) {
 		flyspeed += 0.01;
 		flywheel.Set(-flyspeed);
-		sleep_for(nanoseconds(100000000));
+		SmartDashboard::PutString("DB/String 0", "Spinning wheel");
+		sleep_for(nanoseconds(50000000));
+		if (flyspeed > 0.58) {
+			SmartDashboard::PutString("DB/String 0", "Ready!");
+		}
 		if (bButton !=0) {
 			break;
-		}
-		if (flyspeed > 0.295) {
-			printf("Ready!");
 		}
 	};
 			
