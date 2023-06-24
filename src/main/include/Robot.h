@@ -28,14 +28,20 @@ class Robot : public frc::TimedRobot {
   
  private:
 
+
+    // Mecanum Drive
+    // frc::MecanumDrive drive{frontL, backL, frontR, backR};
+
 	// Left
 	WPI_VictorSPX frontL {1};
 	WPI_VictorSPX backL {2};
+
 
 	// Right
 	WPI_VictorSPX frontR {3};
 	WPI_VictorSPX backR {4};
 
+    // Other
 	WPI_VictorSPX lifter {5};
 	WPI_VictorSPX feed {6};
 	WPI_VictorSPX flywheel {7};

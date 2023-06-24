@@ -22,7 +22,7 @@ double feedSpeed = 0.75;
 bool latch = true;
 double sens = 0.75;
 void Robot::RobotInit() {
-	std::cout << "-- CJ Robot Program Start --" << std::endl;
+	std::cout << "-- LTBT Robot Program Start --" << std::endl;
 }
 
 void Robot::RobotPeriodic() {}
@@ -73,33 +73,6 @@ void Robot::TeleopInit() {
 
 void Robot::TeleopPeriodic() {
 	using namespace frc;
-	double leftJoy = -controller.GetRawAxis(1) * sens;
-	double rightJoy = controller.GetRawAxis(5) * sens;
-
-	// double leftPower = pow(leftJoy, 3);
-	// double rightPower = pow(rightJoy, 3);
-
-	double leftPower = leftJoy * fabs(leftJoy);
-	double rightPower = rightJoy * fabs(rightJoy);
-
-	// leftPower *= maxSpeed;
-	// rightPower *= maxSpeed;
-
-	if (fabs(leftPower) > maxSpeed) {
-		if (leftPower < 0) {
-			leftPower = -maxSpeed;
-		} else {
-			leftPower = maxSpeed;
-		}
-	};
-
-	if (fabs(rightPower) > maxSpeed) {
-		if (rightPower < 0) {
-			rightPower = -maxSpeed;
-		} else {
-			rightPower = maxSpeed;
-		}
-	}
 
 	int leftTrigger = controller.GetRawAxis(2);
 	int rightTrigger = controller.GetRawAxis(3);
@@ -114,22 +87,6 @@ void Robot::TeleopPeriodic() {
 	int fwheelspeed = 0;
 
 	// Left drivetrain
-	if (fabs(leftJoy) > deadZone) {
-		frontR.Set(leftPower);
-		backR.Set(leftPower);
-	} else {
-		frontR.Set(0);
-		backR.Set(0);
-	}
-
-	// right drivetrain
-	if (fabs(rightJoy) > deadZone) {
-		frontL.Set(rightPower);
-		backL.Set(rightPower);
-	} else {
-		frontL.Set(0);
-		backL.Set(0);
-	}
 
 		
 	// Lifter
