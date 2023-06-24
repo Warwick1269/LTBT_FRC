@@ -90,7 +90,7 @@ void Robot::TeleopPeriodic() {
 		} else {
 			leftPower = maxSpeed;
 		}
-	} 
+	};
 
 	if (fabs(rightPower) > maxSpeed) {
 		if (rightPower < 0) {
