@@ -1,8 +1,8 @@
 # FIRST Robotics Competition Code base for Lil' Timmy's Big Team
 
 ## Getting started:
-- Install the wiplib VS code plug in
-- git clone this reporitory
+- Install the wplib VS code plug in
+- git clone this reporitory through the plug in
 - refresh C++ intellisense
 - intall wiplib tools
 - install g++
