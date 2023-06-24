@@ -4,7 +4,7 @@
 - Install the wplib VS code plug in
 - git clone this reporitory through the plug in
 - refresh C++ intellisense
-- intall wiplib tools
+- intall wplib tools
 - install g++
 - gradle build
 - done.
