@@ -13,12 +13,12 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 
 
-double deadzone = 0.01;
-double triggerDeadzone = 0.01;
+double deadZone = 0.01;
+double triggerDeadZone = 0.01;
 double maxSpeed = 0.6;
 // bool lock = false;
-double flyspeed = 0;
-double feedspeed = 0.75;
+double flySpeed = 0;
+double feedSpeed = 0.75;
 bool latch = true;
 double sens = 0.75;
 void Robot::RobotInit() {
@@ -50,16 +50,16 @@ void Robot::AutonomousPeriodic() {
 	lifter.Set(0);
 		
 	for (int i =0; i < 90; i++) {
-		flyspeed += 0.01;
-		flywheel.Set(-flyspeed);
+		flySpeed += 0.01;
+		flywheel.Set(-flySpeed);
 		sleep_for(nanoseconds(100000000));
 	};
 	sleep_for(nanoseconds());
-	feed.Set(feedspeed);
+	feed.Set(feedSpeed);
 	lifter.Set(-0.7);
 
 	sleep_for(nanoseconds(700000000));
-	flyspeed = 0;
+	flySpeed = 0;
 	feed.Set(0);
 	flywheel.Set(0);
 	lifter.Set(0);
@@ -114,7 +114,7 @@ void Robot::TeleopPeriodic() {
 	int fwheelspeed = 0;
 
 	// Left drivetrain
-	if (fabs(leftJoy) > deadzone) {
+	if (fabs(leftJoy) > deadZone) {
 		frontR.Set(leftPower);
 		backR.Set(leftPower);
 	} else {
@@ -123,7 +123,7 @@ void Robot::TeleopPeriodic() {
 	}
 
 	// right drivetrain
-	if (fabs(rightJoy) > deadzone) {
+	if (fabs(rightJoy) > deadZone) {
 		frontL.Set(rightPower);
 		backL.Set(rightPower);
 	} else {
@@ -151,21 +151,21 @@ void Robot::TeleopPeriodic() {
 
 	// feed wheel
 	if (rBumper != 0) {
-		feed.Set(feedspeed);
+		feed.Set(feedSpeed);
 	} else if (lBumper != 0) {
-		feed.Set(-feedspeed);
+		feed.Set(-feedSpeed);
 	} else {
 		feed.Set(0);
 	}
 	// flywheel
 
-	if (yButton !=0 && flyspeed <= 0.01){//on
+	if (yButton !=0 && flySpeed <= 0.01){//on
 	for (int i =0; i < 100; i++) {
-		flyspeed += 0.01;
-		flywheel.Set(-flyspeed);
+		flySpeed += 0.01;
+		flywheel.Set(-flySpeed);
 		SmartDashboard::PutString("DB/String 0", "Spinning wheel");
 		sleep_for(nanoseconds(50000000));
-		if (flyspeed > 0.98) {
+		if (flySpeed > 0.98) {
 			SmartDashboard::PutString("DB/String 0", "Ready!");
 		}
 		if (bButton !=0) {
@@ -174,13 +174,13 @@ void Robot::TeleopPeriodic() {
 	};
 
 	} 
-	else if (xButton !=0 && flyspeed <= 0.01) {
+	else if (xButton !=0 && flySpeed <= 0.01) {
 	for (int i =0; i < 60; i++) {
-		flyspeed += 0.01;
-		flywheel.Set(-flyspeed);
+		flySpeed += 0.01;
+		flywheel.Set(-flySpeed);
 		SmartDashboard::PutString("DB/String 0", "Spinning wheel");
 		sleep_for(nanoseconds(50000000));
-		if (flyspeed > 0.58) {
+		if (flySpeed > 0.58) {
 			SmartDashboard::PutString("DB/String 0", "Ready!");
 		}
 		if (bButton !=0) {
@@ -192,7 +192,7 @@ void Robot::TeleopPeriodic() {
 
 	else if (bButton !=0) {//off
 		flywheel.Set(0);
-		flyspeed = 0;
+		flySpeed = 0;
 	}
 	
 
