@@ -74,7 +74,8 @@ void Robot::TeleopInit() {
 void Robot::TeleopPeriodic() {
 	using namespace frc;
 	
-	Drive newMec();
+	Drive newMec(0.6);
+	newMec.MecDrive(deadZone, maxSpeed);
 
 
 	int leftTrigger = controller.GetRawAxis(2);

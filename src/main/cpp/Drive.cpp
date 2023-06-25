@@ -1,7 +1,7 @@
 #include "Drive.h"
 
 
-Drive::Drive()
+Drive::Drive(double joySense)
 {
 
 	leftJoy = -controller.GetRawAxis(1); 
@@ -15,11 +15,11 @@ Drive::Drive()
 }
 
 
-void Drive::MecDrive(double deadZone, double maxSpeed, double joySense){
+void Drive::MecDrive(double deadZone, double maxSpeed){
 	
 }
 
-void Drive::TrainDrive(double deadZone, double maxSpeed, double joySense){
+void Drive::TrainDrive(double deadZone, double maxSpeed){
 
 	if (fabs(leftPower) > maxSpeed) {
 		if (leftPower < 0) {
