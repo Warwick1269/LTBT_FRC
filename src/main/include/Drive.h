@@ -23,60 +23,16 @@ private:
 	WPI_VictorSPX frontR {3};
 	WPI_VictorSPX backR {4};
 	frc::Joystick controller{0};
+
+	// Controller
+	double leftPower;
+	double rightPower;
+	double leftJoy;
+	double rightJoy;
+
 public:
-    Drive(double deadZone, double maxSpeed, double joySense);
-    ~Drive();
+    Drive(); // This is the constructor function, which is called when the class is instantiated
+	void MecDrive(double deadZone, double maxSpeed, double joySense); // Call this for MecunumDrive bases 
+	void TrainDrive(double deadZone, double maxSpeed, double joySense); // Call this for Drive Trains
 };
 
-Drive::Drive(double deadZone, double maxSpeed, double joySense)
-{
-    using namespace frc;
-
-	double leftJoy = -controller.GetRawAxis(1); 
-	double rightJoy = controller.GetRawAxis(5);
-
-	// Squares joystick intensity for better control, 
-	//while keeping sign (neg and pos)
-	double leftPower = leftJoy * fabs(leftJoy) * joySense;
-	double rightPower = rightJoy * fabs(rightJoy) * joySense;
-
-	// leftPower *= maxSpeed;
-	// rightPower *= maxSpeed;
-
-	if (fabs(leftPower) > maxSpeed) {
-		if (leftPower < 0) {
-			leftPower = -maxSpeed;
-		} else {
-			leftPower = maxSpeed;
-		}
-	}
-
-	if (fabs(rightPower) > maxSpeed) {
-		if (rightPower < 0) {
-			rightPower = -maxSpeed;
-		} else {
-			rightPower = maxSpeed;
-		}
-	}
-
-	if (fabs(leftJoy) > deadZone) {
-		frontR.Set(leftPower);
-		backR.Set(leftPower);
-	} else {
-		frontR.Set(0);
-		backR.Set(0);
-	}
-
-	// right drivetrain
-	if (fabs(rightJoy) > deadZone) {
-		frontL.Set(rightPower);
-		backL.Set(rightPower);
-	} else {
-		frontL.Set(0);
-		backL.Set(0);
-	}
-}
-
-Drive::~Drive()
-{
-}
