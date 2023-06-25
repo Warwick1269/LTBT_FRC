@@ -28,9 +28,6 @@ class Robot : public frc::TimedRobot {
   void TestPeriodic() override;
   
  private:
-
-
-
 	// Left
 	WPI_VictorSPX frontL {1};
 	WPI_VictorSPX backL {2};

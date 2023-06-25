@@ -5,6 +5,7 @@
 #include <chrono>
 #include <thread>
 #include <frc/Joystick.h>
+#include <frc/drive/MecanumDrive.h>
 
 class Drive
 {
@@ -23,21 +24,21 @@ private:
 	WPI_VictorSPX backR {4};
 	frc::Joystick controller{0};
 public:
-    Drive(/* args */);
+    Drive(double deadZone, double maxSpeed, double joySense);
     ~Drive();
 };
 
-Drive::Drive(/* args */)
+Drive::Drive(double deadZone, double maxSpeed, double joySense)
 {
     using namespace frc;
 
-	double leftJoy = -controller.GetRawAxis(1) * joySense;
-	double rightJoy = controller.GetRawAxis(5) * joySense;
+	double leftJoy = -controller.GetRawAxis(1); 
+	double rightJoy = controller.GetRawAxis(5);
 
 	// Squares joystick intensity for better control, 
 	//while keeping sign (neg and pos)
-	double leftPower = leftJoy * fabs(leftJoy);
-	double rightPower = rightJoy * fabs(rightJoy);
+	double leftPower = leftJoy * fabs(leftJoy) * joySense;
+	double rightPower = rightJoy * fabs(rightJoy) * joySense;
 
 	// leftPower *= maxSpeed;
 	// rightPower *= maxSpeed;
@@ -48,7 +49,7 @@ Drive::Drive(/* args */)
 		} else {
 			leftPower = maxSpeed;
 		}
-	};
+	}
 
 	if (fabs(rightPower) > maxSpeed) {
 		if (rightPower < 0) {
