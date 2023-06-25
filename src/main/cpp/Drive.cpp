@@ -19,9 +19,15 @@ void Drive::MecDrive(double deadZone, double maxSpeed){
 	frc::SlewRateLimiter<units::scalar> filterY{0.5 / 1_s};	
 	// Smooth the joystick X for every unit of time
 	frc::SlewRateLimiter<units::scalar> filterX{0.5 / 1_s};
-   // y speed, x speed, rotation, feild orientation compensation
+
+	double joyY = filterY.Calculate(-joystick.GetY());
+	double joyX = filterX.Calculate(-joystick.GetX());
+
+	double joyYPower = joyY * fabs(joyY) * joySense;
+	double joyXPower = joyX * fabs(joyX) * joySense;
 	
-	mec_drive.DriveCartesian(filterY.Calculate(-joystick.GetY()), filterX.Calculate(-joystick.GetX()), -joystick.GetZ(), 0);
+	// y speed, x speed, rotation, feild orientation compensation
+	mec_drive.DriveCartesian(joyYPower, joyXPower, -joystick.GetZ(), 0);
 
 }
 
