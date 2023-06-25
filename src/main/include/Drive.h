@@ -29,8 +29,6 @@ public:
 Drive::Drive(/* args */)
 {
     using namespace frc;
-	using namespace std::this_thread;
-	using namespace std::chrono;
 
 	double leftJoy = -controller.GetRawAxis(1) * joySense;
 	double rightJoy = controller.GetRawAxis(5) * joySense;
