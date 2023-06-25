@@ -10,10 +10,6 @@
 class Drive
 {
 private:
-    // Tuning vars:
-    double deadZone = 0.01;
-    double maxSpeed = 0.6;
-    double joySense = 0.75;
 	// Left
 	WPI_VictorSPX frontL {1};
 	WPI_VictorSPX backL {2};
@@ -23,16 +19,22 @@ private:
 	WPI_VictorSPX frontR {3};
 	WPI_VictorSPX backR {4};
 	frc::Joystick controller{0};
+	frc::Joystick joystick{1};
+
+	frc::MecanumDrive mec_drive{frontL, backL, frontR, backR};
 
 	// Controller
 	double leftPower;
 	double rightPower;
 	double leftJoy;
 	double rightJoy;
+	double joySense;
 
 public:
-    Drive(); // This is the constructor function, which is called when the class is instantiated
-	void MecDrive(double deadZone, double maxSpeed, double joySense); // Call this for MecunumDrive bases 
-	void TrainDrive(double deadZone, double maxSpeed, double joySense); // Call this for Drive Trains
+    Drive(double joySense); // This is the constructor function, which is called when the class is instantiated
+	void MecDrive(double deadZone, double maxSpeed); // Call this for MecunumDrive bases 
+	void TrainDrive(double deadZone, double maxSpeed); // Call this for Drive Trains
+	
+	
 };
 

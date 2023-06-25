@@ -1,4 +1,6 @@
 #include "Drive.h"
+#include <frc/drive/MecanumDrive.h>
+#include <frc/filter/SlewRateLimiter.h>
 
 
 Drive::Drive(double joySense)
@@ -9,17 +11,24 @@ Drive::Drive(double joySense)
 
 	// Squares joystick intensity for better control, 
 	
-	leftPower = leftJoy * fabs(leftJoy) * joySense;
-	rightPower = rightJoy * fabs(rightJoy) * joySense;
 
 }
 
-
 void Drive::MecDrive(double deadZone, double maxSpeed){
+	// Smooth the joystick Y for every unit of time
+	frc::SlewRateLimiter<units::scalar> filterY{0.5 / 1_s};	
+	// Smooth the joystick X for every unit of time
+	frc::SlewRateLimiter<units::scalar> filterX{0.5 / 1_s};
+   // y speed, x speed, rotation, feild orientation compensation
 	
+	mec_drive.DriveCartesian(filterY.Calculate(-joystick.GetY()), filterX.Calculate(-joystick.GetX()), -joystick.GetZ(), 0);
+
 }
 
 void Drive::TrainDrive(double deadZone, double maxSpeed){
+
+	leftPower = leftJoy * fabs(leftJoy) * joySense;
+	rightPower = rightJoy * fabs(rightJoy) * joySense;
 
 	if (fabs(leftPower) > maxSpeed) {
 		if (leftPower < 0) {
