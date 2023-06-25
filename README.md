@@ -18,5 +18,6 @@
 5. Be patient, a well implemented solution is allways better than a hacked together one. (Trust me, this is from personal experience)
 
 ## Docs:
+- [General FRC docs.](https://docs.wpilib.org/en/stable/index.html) (Start here, but skip over java sections, unless you want to re-write in java, in which case good luck)
 - [WPlib C++ docs.](https://github.wpilib.org/allwpilib/docs/release/cpp/index.html)
-- [General FRC docs.](https://docs.wpilib.org/en/stable/index.html)
+
