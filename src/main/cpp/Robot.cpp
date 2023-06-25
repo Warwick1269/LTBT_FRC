@@ -84,7 +84,6 @@ void Robot::TeleopPeriodic() {
 	int lBumper = controller.GetRawButton(5);
 	int rBumper = controller.GetRawButton(6);
 
-	int fwheelspeed = 0;
 
 	// Left drivetrain
 
@@ -166,31 +165,6 @@ void Robot::TestInit() {}
 void Robot::TestPeriodic() {
 	using namespace std::this_thread;
 	using namespace std::chrono;
-	// test and debug code
-	frontL.Set(0.3); //left on
-	backL.Set(0.3);
-	sleep_for(nanoseconds(2000000000)); //2s
-	frontL.Set(0); //left off
-	backL.Set(0);
-	sleep_for(nanoseconds(2000000000)); //2s break
-	frontR.Set(0.3); //right on
-	backR.Set(0.3);
-	sleep_for(nanoseconds(2000000000)); //2s
-	frontR.Set(0); //right off
-	backR.Set(0);
-	sleep_for(nanoseconds(2000000000)); //2s break
-	flywheel.Set(1); //flywheel on
-	sleep_for(nanoseconds(2000000000)); //2s
-	flywheel.Set(0); //flywheel off
-	sleep_for(nanoseconds(2000000000)); //2s break
-	lifter.Set(1); //lifter on
-	sleep_for(nanoseconds(2000000000)); //2s
-	lifter.Set(0); //lifter off
-	sleep_for(nanoseconds(2000000000)); //2s break
-	feed.Set(0.3); //feed on
-	sleep_for(nanoseconds(2000000000)); //2s
-	feed.Set(0); //feed off
-	sleep_for(nanoseconds(2000000000)); //2s break
 }
 
 #ifndef RUNNING_FRC_TESTS

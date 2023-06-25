@@ -12,6 +12,7 @@
 #include <ctre/Phoenix.h>
 
 #include <frc/Joystick.h>
+#include <frc/drive/MecanumDrive.h>
 
 class Robot : public frc::TimedRobot {
  public:
@@ -29,8 +30,6 @@ class Robot : public frc::TimedRobot {
  private:
 
 
-    // Mecanum Drive
-    // frc::MecanumDrive drive{frontL, backL, frontR, backR};
 
 	// Left
 	WPI_VictorSPX frontL {1};
@@ -41,6 +40,8 @@ class Robot : public frc::TimedRobot {
 	WPI_VictorSPX frontR {3};
 	WPI_VictorSPX backR {4};
 
+    // Mecanum Drive
+    frc::MecanumDrive drive{frontL, backL, frontR, backR};
     // Other
 	WPI_VictorSPX lifter {5};
 	WPI_VictorSPX feed {6};

@@ -9,6 +9,7 @@
 class Drive
 {
 private:
+    // Tuning vars:
     double deadZone = 0.01;
     double maxSpeed = 0.6;
     double joySense = 0.75;
@@ -33,9 +34,8 @@ Drive::Drive(/* args */)
 	double leftJoy = -controller.GetRawAxis(1) * joySense;
 	double rightJoy = controller.GetRawAxis(5) * joySense;
 
-	// double leftPower = pow(leftJoy, 3);
-	// double rightPower = pow(rightJoy, 3);
-
+	// Squares joystick intensity for better control, 
+	//while keeping sign (neg and pos)
 	double leftPower = leftJoy * fabs(leftJoy);
 	double rightPower = rightJoy * fabs(rightJoy);
 
