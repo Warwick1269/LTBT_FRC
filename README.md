@@ -2,13 +2,13 @@
 
 ## Getting started:
 - Install the wplib VS code plug in
-- git clone this reporitory through the plug in
+- git clone this repository through the plug in
 - refresh C++ intellisense
-- intall wplib tools
+- install wplib tools
 - install g++
 - gradle build
 - done.
-- (note these steps are just a reminder for how I got everything working, will make a more detialed version later)
+- (note these steps are just a reminder for how I got everything working, will make a more detailed version later)
 
 ## How to not get in code dept:
 1. Save often
