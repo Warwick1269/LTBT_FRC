@@ -19,6 +19,8 @@ void Drive::MecDrive(double deadZone, double maxSpeed){
 	frc::SlewRateLimiter<units::scalar> filterY{0.5 / 1_s};	
 	// Smooth the joystick X for every unit of time
 	frc::SlewRateLimiter<units::scalar> filterX{0.5 / 1_s};
+	//NOTE: You need to create a new SlewRateLimiter for each value you want to smooth. 
+	//They will collide if you use the same SlewRateLimiter for multiple values.
 
 	double joyY = filterY.Calculate(-joystick.GetY());
 	double joyX = filterX.Calculate(-joystick.GetX());
