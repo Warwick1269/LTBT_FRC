@@ -16,7 +16,7 @@
 3. Commit even more often in said new branch.
 4. Build often.
 5. Be patient, a well implemented solution is allways better than a hacked together one. (Trust me, this is from personal experience)
-6. And finally, read the documentation when you get stuck.
+6. And finally, arguably the most important step of all, read the documentation.
 
 ## Docs:
 - [General FRC docs.](https://docs.wpilib.org/en/stable/index.html) (Start here, but skip over java sections, unless you want to re-write in java, in which case good luck)
