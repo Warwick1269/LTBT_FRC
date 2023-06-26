@@ -1,13 +1,14 @@
 # FIRST Robotics Competition Code base for Lil' Timmy's Big Team
 
 ## Getting started:
-- Install the wplib VS code plug in
+- Install the WPIlib VS code plug in
 - git clone this repository through the plug in
 - refresh C++ intellisense
-- install wplib tools
+- install WPIlib tools
 - install g++
 - gradle build
 - done.
+- (note these steps are just a reminder for how I got everything working, will make a more detailed version later)
 - (note these steps are just a reminder for how I got everything working, will make a more detailed version later)
 
 ## How to not get in code dept:
@@ -15,7 +16,7 @@
 2. Make a new branch when making large changes.
 3. Commit even more often in said new branch.
 4. Build often.
-5. Be patient, a well implemented solution is allways better than a hacked together one. (Trust me, this is from personal experience)
+5. Be patient, a well implemented solution is always better than a hacked together one. (Trust me, this is from personal experience)
 6. And finally, arguably the most important step of all, read the documentation when you get stuck or want to implement something new (as there's probably a library that already does it).
 
 ## Docs:
