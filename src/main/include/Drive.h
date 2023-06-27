@@ -28,7 +28,7 @@ private:
 	double rightPower;
 	double leftJoy;
 	double rightJoy;
-	double joySense;
+	double _joySense;
 
 public:
     Drive(double joySense); // This is the constructor function, which is called when the class is instantiated

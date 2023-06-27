@@ -5,7 +5,7 @@
 
 Drive::Drive(double joySense)
 {
-
+	_joySense = joySense;	
 	leftJoy = -controller.GetRawAxis(1); 
 	rightJoy = controller.GetRawAxis(5);
 
@@ -25,8 +25,8 @@ void Drive::MecDrive(double deadZone, double maxSpeed){
 	double joyY = filterY.Calculate(-joystick.GetY());
 	double joyX = filterX.Calculate(-joystick.GetX());
 
-	double joyYPower = joyY * fabs(joyY) * joySense;
-	double joyXPower = joyX * fabs(joyX) * joySense;
+	double joyYPower = joyY * fabs(joyY) * _joySense;
+	double joyXPower = joyX * fabs(joyX) * _joySense;
 	
 	// y speed, x speed, rotation, feild orientation compensation
 	mec_drive.DriveCartesian(joyYPower, joyXPower, -joystick.GetZ(), 0);
@@ -35,8 +35,8 @@ void Drive::MecDrive(double deadZone, double maxSpeed){
 
 void Drive::TrainDrive(double deadZone, double maxSpeed){
 
-	leftPower = leftJoy * fabs(leftJoy) * joySense;
-	rightPower = rightJoy * fabs(rightJoy) * joySense;
+	leftPower = leftJoy * fabs(leftJoy) * _joySense;
+	rightPower = rightJoy * fabs(rightJoy) * _joySense;
 
 	if (fabs(leftPower) > maxSpeed) {
 		if (leftPower < 0) {
