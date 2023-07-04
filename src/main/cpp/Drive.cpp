@@ -58,21 +58,13 @@ void Drive::TrainDrive(double deadZone, double maxSpeed){
 	rightPower = rightJoy * fabs(rightJoy) * _joySense;
 
 	if (fabs(leftPower) > maxSpeed) {
-		if (leftPower < 0) {
-			leftPower = -maxSpeed;
-		} else {
-			leftPower = maxSpeed;
-		}
+		leftPower = leftPower < 0 ? -maxSpeed : maxSpeed;
 	}
-
 	if (fabs(rightPower) > maxSpeed) {
-		if (rightPower < 0) {
-			rightPower = -maxSpeed;
-		} else {
-			rightPower = maxSpeed;
-		}
+		rightPower = rightPower < 0 ? -maxSpeed : maxSpeed;
 	}
 
+	// right drive train
 	if (fabs(leftJoy) > deadZone) {
 		frontR.Set(leftPower);
 		backR.Set(leftPower);
@@ -81,7 +73,7 @@ void Drive::TrainDrive(double deadZone, double maxSpeed){
 		backR.Set(0);
 	}
 
-	// right drivetrain>
+	// left drive train
 	if (fabs(rightJoy) > deadZone) {
 		frontL.Set(rightPower);
 		backL.Set(rightPower);
