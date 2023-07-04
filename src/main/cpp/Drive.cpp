@@ -1,21 +1,19 @@
 #include "Drive.h"
-#include <frc/drive/MecanumDrive.h>
 #include <frc/filter/SlewRateLimiter.h>
 
 
-Drive::Drive(double joySense)
+// Drive constructor: joySense is the speed multiplier or joystick sensitivity; default 0.6, deadZone is 0.015 default, maxSpeed is 0.9 default; is between 0-1.
+Drive::Drive(double joySense, double deadZone, double maxSpeed)
 {
 	_joySense = joySense;	
-	leftJoy = -controller.GetRawAxis(1); 
-	rightJoy = controller.GetRawAxis(5);
-
+	_deadZone = deadZone;
+	_maxSpeed = maxSpeed;
 	// Squares joystick intensity for better control, 
 	
 
 }
 
-// MecDrive: deadZone is 0.015 default, maxSpeed is 0.9 default; is between 0-1.
-void Drive::MecDrive(double deadZone, double maxSpeed){
+void Drive::MecDrive(){
 	//NOTE: You need to create a new SlewRateLimiter for each value you want to smooth. 
 	//They will collide if you use the same SlewRateLimiter for multiple values.
 
@@ -26,9 +24,9 @@ void Drive::MecDrive(double deadZone, double maxSpeed){
 
 	// Limits the joystick to the dead zone using a turnery. 
 	// i.e. if abs of joystick is greater than dead zone, use joystick value. else 0	
-	double joyZonedY = fabs(joystick.GetY()) > deadZone ? joystick.GetY() : 0;
-	double joyZonedX = fabs(joystick.GetX()) > deadZone ? joystick.GetX() : 0;
-	double joyZonedZ = fabs(joystick.GetZ()) > deadZone ? joystick.GetZ() : 0;
+	double joyZonedY = fabs(joystick.GetY()) > _deadZone ? joystick.GetY() : 0;
+	double joyZonedX = fabs(joystick.GetX()) > _deadZone ? joystick.GetX() : 0;
+	double joyZonedZ = fabs(joystick.GetZ()) > _deadZone ? joystick.GetZ() : 0;
 
 	//Applies the slew rate limiter
 	double joyY = filterY.Calculate(-joyZonedY);
@@ -40,11 +38,11 @@ void Drive::MecDrive(double deadZone, double maxSpeed){
 	double joyXPower = joyX * fabs(joyX) * _joySense;
 
 	// limit joy power to max speed.
-	if (fabs(joyYPower) > maxSpeed) {
-		joyYPower = joyYPower < 0 ? -maxSpeed : maxSpeed;
+	if (fabs(joyYPower) > _maxSpeed) {
+		joyYPower = joyYPower < 0 ? -_maxSpeed : _maxSpeed;
 	}
-	if (fabs(joyXPower) > maxSpeed) {
-		joyXPower = joyXPower < 0 ? -maxSpeed : maxSpeed;
+	if (fabs(joyXPower) > _maxSpeed) {
+		joyXPower = joyXPower < 0 ? -_maxSpeed : _maxSpeed;
 	}
 	
 	// y speed, x speed, rotation, feild orientation compensation angle
@@ -52,34 +50,22 @@ void Drive::MecDrive(double deadZone, double maxSpeed){
 
 }
 
-void Drive::TrainDrive(double deadZone, double maxSpeed){
+void Drive::TrainDrive(){
+	double leftJoy = -controller.GetRawAxis(1); 
+	double rightJoy = controller.GetRawAxis(5);
 
-	leftPower = leftJoy * fabs(leftJoy) * _joySense;
-	rightPower = rightJoy * fabs(rightJoy) * _joySense;
+	double joyZonedL = fabs(leftJoy) > _deadZone ? leftJoy : 0;
+	double joyZonedR = fabs(rightJoy) > _deadZone ? rightJoy : 0;	
 
-	if (fabs(leftPower) > maxSpeed) {
-		leftPower = leftPower < 0 ? -maxSpeed : maxSpeed;
+	double leftPower = joyZonedL * fabs(joyZonedL) * _joySense;
+	double rightPower = joyZonedR * fabs(joyZonedR) * _joySense;
+
+	if (fabs(leftPower) > _maxSpeed) {
+		leftPower = leftPower < 0 ? -_maxSpeed : _maxSpeed;
 	}
-	if (fabs(rightPower) > maxSpeed) {
-		rightPower = rightPower < 0 ? -maxSpeed : maxSpeed;
-	}
-
-	// right drive train
-	if (fabs(leftJoy) > deadZone) {
-		frontR.Set(leftPower);
-		backR.Set(leftPower);
-	} else {
-		frontR.Set(0);
-		backR.Set(0);
+	if (fabs(rightPower) > _maxSpeed) {
+		rightPower = rightPower < 0 ? -_maxSpeed : _maxSpeed;
 	}
 
-	// left drive train
-	if (fabs(rightJoy) > deadZone) {
-		frontL.Set(rightPower);
-		backL.Set(rightPower);
-	} else {
-		frontL.Set(0);
-		backL.Set(0);
-	}
-    
+	m_drive.TankDrive(leftPower, rightPower);	
 }
