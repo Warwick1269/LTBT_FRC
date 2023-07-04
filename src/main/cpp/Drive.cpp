@@ -14,7 +14,7 @@ Drive::Drive(double joySense)
 
 }
 
-// MecDrive: deadZone is 0.015 default, maxSpeed is 0.9 default is between 0-1.
+// MecDrive: deadZone is 0.015 default, maxSpeed is 0.9 default; is between 0-1.
 void Drive::MecDrive(double deadZone, double maxSpeed){
 	//NOTE: You need to create a new SlewRateLimiter for each value you want to smooth. 
 	//They will collide if you use the same SlewRateLimiter for multiple values.
