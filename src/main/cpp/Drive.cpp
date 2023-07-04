@@ -50,21 +50,25 @@ void Drive::MecDrive(){
 }
 
 void Drive::TrainDrive(){
+	// assign joystick values
 	double leftJoy = -controller.GetRawAxis(1); 
 	double rightJoy = controller.GetRawAxis(5);
 
+	// apply dead zones
 	double joyZonedL = fabs(leftJoy) > _deadZone ? leftJoy : 0;
 	double joyZonedR = fabs(rightJoy) > _deadZone ? rightJoy : 0;	
 
 	double leftPower = joyZonedL * fabs(joyZonedL) * _joySense;
 	double rightPower = joyZonedR * fabs(joyZonedR) * _joySense;
 
+	// limit power to max speed
 	if (fabs(leftPower) > _maxSpeed) {
 		leftPower = leftPower < 0 ? -_maxSpeed : _maxSpeed;
 	}
 	if (fabs(rightPower) > _maxSpeed) {
 		rightPower = rightPower < 0 ? -_maxSpeed : _maxSpeed;
 	}
-
+	
+	// left motor speed, right motor speed 
 	m_drive.TankDrive(leftPower, rightPower);	
 }
