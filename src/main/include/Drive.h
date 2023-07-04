@@ -9,6 +9,9 @@
 #include <frc/motorcontrol/MotorControllerGroup.h>
 #include <frc/drive/DifferentialDrive.h>
 
+// This is the class containing all the drive functions and *exposed* variables.
+// Drive constructor: joySense is the speed multiplier or joystick sensitivity; suggested 0.6, deadZone is 0.015 suggested, maxSpeed is 0.9 suggested; is between 0-1.
+// arguments in order: joySense, deadZone, maxSpeed
 class Drive
 {
 private:

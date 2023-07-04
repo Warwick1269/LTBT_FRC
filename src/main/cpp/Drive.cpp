@@ -2,13 +2,12 @@
 #include <frc/filter/SlewRateLimiter.h>
 
 
-// Drive constructor: joySense is the speed multiplier or joystick sensitivity; default 0.6, deadZone is 0.015 default, maxSpeed is 0.9 default; is between 0-1.
 Drive::Drive(double joySense, double deadZone, double maxSpeed)
 {
+	// assign arguments to private variables (hance the underscores)
 	_joySense = joySense;	
 	_deadZone = deadZone;
 	_maxSpeed = maxSpeed;
-	// Squares joystick intensity for better control, 
 	
 
 }
