@@ -22,14 +22,23 @@ void Drive::MecDrive(double deadZone, double maxSpeed){
 	//NOTE: You need to create a new SlewRateLimiter for each value you want to smooth. 
 	//They will collide if you use the same SlewRateLimiter for multiple values.
 
-	double joyY = filterY.Calculate(-joystick.GetY());
-	double joyX = filterX.Calculate(-joystick.GetX());
 
+
+	// Limits the joystick to the dead zone using a turnery	
+	double joyZonedY = fabs(joystick.GetY()) > deadZone ? joystick.GetY() : 0;
+	double joyZonedX = fabs(joystick.GetX()) > deadZone ? joystick.GetX() : 0;
+	double joyZonedZ = fabs(joystick.GetZ()) > deadZone ? joystick.GetZ() : 0;
+
+	//Applies the slew rate limiter
+	double joyY = filterY.Calculate(-joyZonedY);
+	double joyX = filterX.Calculate(-joyZonedX);
+
+	// squares joystick intensity for finer control and then adjusts for joy sense
 	double joyYPower = joyY * fabs(joyY) * _joySense;
 	double joyXPower = joyX * fabs(joyX) * _joySense;
 	
-	// y speed, x speed, rotation, feild orientation compensation
-	mec_drive.DriveCartesian(joyYPower, joyXPower, -joystick.GetZ(), 0);
+	// y speed, x speed, rotation, feild orientation compensation angle
+	mec_drive.DriveCartesian(joyYPower, joyXPower, -joyZonedZ, 0);
 
 }
 
