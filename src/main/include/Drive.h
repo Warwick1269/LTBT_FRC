@@ -22,6 +22,7 @@ private:
 	frc::Joystick joystick{1};
 
 	frc::MecanumDrive mec_drive{frontL, backL, frontR, backR};
+	double _manualGyro = 0;
 
 	// Controller
 	double leftPower;
