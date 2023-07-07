@@ -21,5 +21,12 @@
 
 ## Docs:
 - [General FRC docs.](https://docs.wpilib.org/en/stable/index.html) (Start here, but skip over java sections, unless you want to re-write in java, in which case good luck)
-- [WPlib C++ docs.](https://github.wpilib.org/allwpilib/docs/release/cpp/index.html) (good for finding #includes for various functions/objects)
+- [WPIlib C++ docs.](https://github.wpilib.org/allwpilib/docs/release/cpp/index.html) (good for finding #includes for various functions/objects)
 
+## VSCode Extensions:
+### Required:
+- [WPILib](https://marketplace.visualstudio.com/items?itemName=wpilibsuite.vscode-wpilib)
+- [c/c++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
+## Recommended 
+- [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens) (If you use any of the recommended, use this one. It **will** save you so much time)
+- [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)
