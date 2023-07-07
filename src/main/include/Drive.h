@@ -47,10 +47,12 @@ private:
 
 public:
     Drive(double joySense, double deadZone); // This is the constructor function, which is called when the class is instantiated
+	
 	void MecDrive(); // Call this for MecanumDrive bases 
 	void TrainDrive(); // Call this for Drive Trains
-	void TimedAutoMecDrive(int timeMS, double speedX, double speedY, double rotationZ, double fieldOrient);
 
+	void TimedAutoMecDrive(int timeMS, double speedX, double speedY, double rotationZ, double fieldOrient);
+	void TimedAutoTrainDrive(int timeMS, double speedL, double speedR);
 	
 	
 };
