@@ -79,7 +79,8 @@ void Robot::TeleopPeriodic() {
 
 	using namespace frc;
 	// create drive object	
-	Drive newMec(0.6, 0.015, 0.9);
+	// DeadZone, MaxSpeed
+	Drive newMec(0.02, 0.8);
 	// call MecDrive for mecunum drive control
 	newMec.MecDrive();
 
