@@ -27,6 +27,6 @@
 ### Required:
 - [WPILib](https://marketplace.visualstudio.com/items?itemName=wpilibsuite.vscode-wpilib)
 - [c/c++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
-## Recommended 
+### Recommended:
 - [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens) (If you use any of the recommended, use this one. It **will** save you so much time)
 - [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)
