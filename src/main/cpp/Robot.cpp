@@ -13,14 +13,11 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 
 
-double deadZone = 0.01;
 double triggerDeadZone = 0.01;
-double maxSpeed = 0.6;
 // bool lock = false;
 double flySpeed = 0;
 double feedSpeed = 0.75;
 bool latch = true;
-double sens = 0.75;
 void Robot::RobotInit() {
 	std::cout << "-- LTBT Robot Program Start --" << std::endl;
 }
@@ -32,39 +29,18 @@ void Robot::AutonomousInit() {}
 void Robot::AutonomousPeriodic() {
 	using namespace std::this_thread;
 	using namespace std::chrono;
+	Drive newMec(0.02, 0.8);
 	
-	if (latch == true) {
 	
-	frontL.Set(0.3);
-	backL.Set(0.3);
-	frontR.Set(-0.3);
-	backR.Set(-0.3);
-	lifter.Set(-0.7);
+	if (latch == true) 
+	{
+		newMec.TimedAutoMecDrive(500, 0.1, 0, 0, 0);
+		newMec.TimedAutoMecDrive(500, -0.1, 0, 0, 0);
+		newMec.TimedAutoMecDrive(500, 0, -0.1, 0, 0);
+		newMec.TimedAutoMecDrive(500, 0, 0.1, 0, 0);
 
-	sleep_for(nanoseconds(3000000000));
-	// delay 1 sec
-	frontL.Set(0);
-	backL.Set(0);
-	frontR.Set(0);
-	backR.Set(0);
-	lifter.Set(0);
-		
-	for (int i =0; i < 90; i++) {
-		flySpeed += 0.01;
-		flywheel.Set(-flySpeed);
-		sleep_for(nanoseconds(100000000));
-	};
-	sleep_for(nanoseconds());
-	feed.Set(feedSpeed);
-	lifter.Set(-0.7);
-
-	sleep_for(nanoseconds(700000000));
-	flySpeed = 0;
-	feed.Set(0);
-	flywheel.Set(0);
-	lifter.Set(0);
-	latch = false;
-
+	
+		latch = false;
 	}
 }
 

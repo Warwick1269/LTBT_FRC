@@ -3,5 +3,8 @@
     "cSpell.words": [
         "Deadband",
         "Mecanum"
-    ]
+    ],
+    "files.associations": {
+        "chrono": "cpp"
+    }
 }

@@ -1,19 +1,19 @@
 #include "Robot.h"
-#include <unistd.h>
-#include <iostream>
-#include <math.h>
-#include <chrono>
-#include <thread>
 #include <frc/Joystick.h>
 #include <frc/drive/MecanumDrive.h>
 #include <frc/motorcontrol/MotorControllerGroup.h>
 #include <frc/drive/DifferentialDrive.h>
 
-// This is the class containing all the drive functions and *exposed* variables.
-// Drive constructor: deadZone is 0.02 default, maxSpeed is 0.8 suggested; is between 0-1; 
-// will multiply the value of joystick input by this to change the max speed while keeping the same range of joystick movement
-// as 0 * 0.8 = 0, and 1 * 0.8 = 0.8.
+// 
+// 
+// 
 // arguments in order: deadZone, maxSpeed
+
+/// @brief This is the class containing all the drive functions and *exposed* variables.
+/// Drive constructor: 
+/// @param deadZone is 0.02 default, 
+/// @param maxSpeed is 0.8 suggested; is between 0-1; 
+/// will multiply the value of joystick input by this to change the max speed while keeping the same range of joystick movement as 0 * 0.8 = 0, and 1 * 0.8 = 0.8.
 class Drive
 {
 private:
@@ -47,9 +47,12 @@ private:
 
 public:
     Drive(double joySense, double deadZone); // This is the constructor function, which is called when the class is instantiated
+	
 	void MecDrive(); // Call this for MecanumDrive bases 
 	void TrainDrive(); // Call this for Drive Trains
 
+	void TimedAutoMecDrive(int timeMS, double speedX, double speedY, double rotationZ, double fieldOrient);
+	void TimedAutoTrainDrive(int timeMS, double speedL, double speedR);
 	
 	
 };

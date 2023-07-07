@@ -28,17 +28,6 @@ class Robot : public frc::TimedRobot {
   void TestPeriodic() override;
   
  private:
-	// Left
-	WPI_VictorSPX frontL {1};
-	WPI_VictorSPX backL {2};
-
-
-	// Right
-	WPI_VictorSPX frontR {3};
-	WPI_VictorSPX backR {4};
-
-    // Mecanum Drive
-    frc::MecanumDrive drive{frontL, backL, frontR, backR};
     // Other
 	WPI_VictorSPX lifter {5};
 	WPI_VictorSPX feed {6};
