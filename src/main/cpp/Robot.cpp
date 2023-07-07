@@ -72,10 +72,17 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
+	// Note for Teleop, DONT USE FOR LOOPS OR WHILE LOOPS! (unless it is really fast / no sleep_for() in the loop) 
+	// it will stay at the loop until it is completed (essentially freezing your robot).
+	// Teleop is already called every cycle, so use this to your advantage instead of making loops yourself.
+
+
 	using namespace frc;
-	
-	Drive newMec(0.6);
-	newMec.MecDrive(deadZone, maxSpeed);
+	// create drive object	
+	// DeadZone, MaxSpeed
+	Drive newMec(0.02, 0.8);
+	// call MecDrive for mecunum drive control
+	newMec.MecDrive();
 
 
 	int leftTrigger = controller.GetRawAxis(2);

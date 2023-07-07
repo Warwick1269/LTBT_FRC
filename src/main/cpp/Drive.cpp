@@ -1,74 +1,52 @@
 #include "Drive.h"
-#include <frc/drive/MecanumDrive.h>
 #include <frc/filter/SlewRateLimiter.h>
 
 
-Drive::Drive(double joySense)
+Drive::Drive(double deadZone, double maxSpeed)
 {
-	_joySense = joySense;	
-	leftJoy = -controller.GetRawAxis(1); 
-	rightJoy = controller.GetRawAxis(5);
+	// assign arguments to private variables (hance the underscores)
+	_deadZone = deadZone;
+	_maxSpeed = maxSpeed;
 
-	// Squares joystick intensity for better control, 
+	// Set DeadZones for MecanumDrive and DriveTrain	
+	mec_drive.SetDeadband(deadZone);
+	tank_drive.SetDeadband(deadZone);
+	
+	// Set MaxOutput for MecanumDrive and DriveTrain
+	mec_drive.SetMaxOutput(maxSpeed);
+	tank_drive.SetMaxOutput(maxSpeed);
 	
 
 }
 
-void Drive::MecDrive(double deadZone, double maxSpeed){
+void Drive::MecDrive(){
+	//NOTE: You need to create a new SlewRateLimiter for each value you want to smooth. 
+	//They will collide if you use the same SlewRateLimiter for multiple values.
+
 	// Smooth the joystick Y for every unit of time
 	frc::SlewRateLimiter<units::scalar> filterY{0.5 / 1_s};	
 	// Smooth the joystick X for every unit of time
 	frc::SlewRateLimiter<units::scalar> filterX{0.5 / 1_s};
-	//NOTE: You need to create a new SlewRateLimiter for each value you want to smooth. 
-	//They will collide if you use the same SlewRateLimiter for multiple values.
 
+	//Applies the slew rate limiter
 	double joyY = filterY.Calculate(-joystick.GetY());
 	double joyX = filterX.Calculate(-joystick.GetX());
 
-	double joyYPower = joyY * fabs(joyY) * _joySense;
-	double joyXPower = joyX * fabs(joyX) * _joySense;
+	// squares joystick intensity for finer control. This is not done for mecanum drive but is automatically done for drive train
+	double joyYPower = joyY * fabs(joyY);
+	double joyXPower = joyX * fabs(joyX);
 	
-	// y speed, x speed, rotation, feild orientation compensation
-	mec_drive.DriveCartesian(joyYPower, joyXPower, -joystick.GetZ(), 0);
+	// y speed, x speed, rotation, feild orientation compensation angle
+	mec_drive.DriveCartesian(joyYPower, joyXPower, -joystick.GetZ(), _manualGyro);
+	
 
 }
 
-void Drive::TrainDrive(double deadZone, double maxSpeed){
-
-	leftPower = leftJoy * fabs(leftJoy) * _joySense;
-	rightPower = rightJoy * fabs(rightJoy) * _joySense;
-
-	if (fabs(leftPower) > maxSpeed) {
-		if (leftPower < 0) {
-			leftPower = -maxSpeed;
-		} else {
-			leftPower = maxSpeed;
-		}
-	}
-
-	if (fabs(rightPower) > maxSpeed) {
-		if (rightPower < 0) {
-			rightPower = -maxSpeed;
-		} else {
-			rightPower = maxSpeed;
-		}
-	}
-
-	if (fabs(leftJoy) > deadZone) {
-		frontR.Set(leftPower);
-		backR.Set(leftPower);
-	} else {
-		frontR.Set(0);
-		backR.Set(0);
-	}
-
-	// right drivetrain>
-	if (fabs(rightJoy) > deadZone) {
-		frontL.Set(rightPower);
-		backL.Set(rightPower);
-	} else {
-		frontL.Set(0);
-		backL.Set(0);
-	}
-    
+void Drive::TrainDrive(){
+	// assign joystick values
+	double leftJoy = -controller.GetRawAxis(1); 
+	double rightJoy = controller.GetRawAxis(5);
+	
+	// left motor speed, right motor speed, square joystick intensity true/false
+	tank_drive.TankDrive(leftJoy, rightJoy, true);	
 }
