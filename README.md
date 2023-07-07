@@ -21,7 +21,7 @@
 
 ## Docs:
 - [General FRC docs.](https://docs.wpilib.org/en/stable/index.html) (Start here, but skip over java sections, unless you want to re-write in java, in which case good luck)
-- [WPIlib C++ docs.](https://github.wpilib.org/allwpilib/docs/release/cpp/index.html) (good for finding #includes for various functions/objects)
+- [WPILib C++ docs.](https://github.wpilib.org/allwpilib/docs/release/cpp/index.html) (good for finding #includes for various functions/objects)
 
 ## VSCode Extensions:
 ### Required:
