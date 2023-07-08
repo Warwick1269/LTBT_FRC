@@ -57,7 +57,7 @@ void Robot::TeleopPeriodic() {
 	// create drive object	
 	// DeadZone, MaxSpeed
 	Drive newMec(0.02, 0.8);
-	// call MecDrive for mecunum drive control
+	// call MecDrive for mecanum drive control
 	newMec.MecDrive();
 
 

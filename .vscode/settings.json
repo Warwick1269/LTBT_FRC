@@ -7,5 +7,6 @@
     ],
     "files.associations": {
         "chrono": "cpp"
-    }
+    },
+    "cmake.configureOnOpen": false
 }
