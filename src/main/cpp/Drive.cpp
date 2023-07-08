@@ -39,33 +39,11 @@ void Drive::MecDrive()
 	double joyXPower = joyX * fabs(joyX);
 	
 	// y speed, x speed, rotation, feild orientation compensation angle
-	mec_drive.DriveCartesian(joyYPower, joyXPower, -joystick.GetZ(), _manualGyro);
+	mec_drive.DriveCartesian(joyYPower, joyXPower, -joystick.GetZ(), _gyro);
 	
 
 }
 
-/// @brief The function for timed auto drive when using MecanumDrive 
-/// @param timeMS: The time it takes to complete the drive in miliseconds
-/// @param speedX: The speed for x axis, [-1.0..1.0]
-/// @param speedY: The speed for y axis, [-1.0..1.0]
-/// @param rotationZ: The robot's rotation rate around the Z axis [-1.0..1.0]. Clockwise is positive.
-/// gyroAngle – The current angle reading from the gyro in degrees around the Z axis. Use this to implement field-oriented controls.
-/// @param fieldOrient in Rads.
-void Drive::TimedAutoMecDrive(int timeMS, double speedX, double speedY, double rotationZ, double fieldOrient)
-{
-	using namespace std::this_thread;
-	using namespace std::chrono;
-	
-	// mec_drive.SetSafetyEnabled(false);
-
-	mec_drive.DriveCartesian(speedX, speedY, rotationZ, fieldOrient);
-	
-	sleep_for(milliseconds(timeMS));
-
-	mec_drive.StopMotor();
-
-	//mec_drive.SetSafetyEnabled(true);
-}
 
 void Drive::TrainDrive()
 {
@@ -77,26 +55,26 @@ void Drive::TrainDrive()
 	tank_drive.TankDrive(leftJoy, rightJoy, true);	
 }
 
-/**
- * TimedAutoTrainDrive is a function that drives the DriveTrain for a specified amount of time
- * at a given speed on the left and right sides.
- *
- * @param timeMS the duration of time to drive the train in milliseconds
- * @param speedL the speed of the left side of the DriveTrain
- * @param speedR the speed of the right side of the DriveTrain
- */
-void Drive::TimedAutoTrainDrive(int timeMS, double speedL, double speedR)
+/// RAW FUNCTIONS
+
+void Drive::RawMecDrive(double speedX, double speedY, double rotationZ, double fieldOrient)
 {
-	using namespace std::this_thread;
-	using namespace std::chrono;
+	mec_drive.DriveCartesian(speedX, speedY, rotationZ, fieldOrient);
+}
 
-	// tank_drive.SetSafetyEnabled(false);
-
+void Drive::RawTrainDrive(double speedL, double speedR)
+{
 	tank_drive.TankDrive(speedL, speedR, false);
+}
 
-	sleep_for(milliseconds(timeMS));
-	
+void Drive::StopDrives()
+{
 	tank_drive.StopMotor();
+	mec_drive.StopMotor();
+}
 
-	// tank_drive.SetSafetyEnabled(true);
+void Drive::SetDriveSafety(bool enabled)
+{
+	tank_drive.SetSafetyEnabled(enabled);
+	mec_drive.SetSafetyEnabled(enabled);
 }

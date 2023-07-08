@@ -9,6 +9,7 @@
 #include <chrono>
 #include <thread>
 #include "Drive.h"
+#include "Auto.h"
 
 #include <frc/smartdashboard/SmartDashboard.h>
 
@@ -24,33 +25,35 @@ void Robot::RobotInit() {
 
 void Robot::RobotPeriodic() {}
 
-void Robot::AutonomousInit() {}
+void Robot::AutonomousInit() 
+{
+	Auto newAuto;
 
-void Robot::AutonomousPeriodic() {
-	using namespace std::this_thread;
-	using namespace std::chrono;
-	Drive newMec(0.02, 0.8);
-	
-	
-	if (latch == true) 
-	{
-		newMec.TimedAutoMecDrive(500, 0.1, 0, 0, 0);
-		newMec.TimedAutoMecDrive(500, -0.1, 0, 0, 0);
-		newMec.TimedAutoMecDrive(500, 0, -0.1, 0, 0);
-		newMec.TimedAutoMecDrive(500, 0, 0.1, 0, 0);
-
-	
-		latch = false;
-	}
+	newAuto.TimedAutoMecDrive(1000, 0, 0.1, 0, 0);
 }
 
-void Robot::TeleopInit() {
+void Robot::AutonomousPeriodic() 
+{
+	// Auto newAuto;
+	
+	
+	// if (latch == true) 
+	// {	
+	// 	newAuto.TimedAutoMecDrive(1000, 0, 0.1, 0, 0);
+
+	// 	latch = false;
+
+	// }
+
 }
 
-void Robot::TeleopPeriodic() {
+void Robot::TeleopInit() {}
+
+void Robot::TeleopPeriodic() 
+{
 	// Note for Teleop, DONT USE FOR LOOPS OR WHILE LOOPS! (unless it is really fast / no sleep_for() in the loop) 
 	// it will stay at the loop until it is completed (essentially freezing your robot).
-	// Teleop is already called every cycle, so use this to your advantage instead of making loops yourself.
+	// Teleop is already called every cycle, so use this to your advantage.
 
 
 	using namespace frc;
