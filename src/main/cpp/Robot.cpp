@@ -15,10 +15,6 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 
 
-double triggerDeadZone = 0.01;
-// bool lock = false;
-double flySpeed = 0;
-double feedSpeed = 0.75;
 bool latch = true;
 void Robot::RobotInit() {
 	std::cout << "-- LTBT Robot Program Start --" << std::endl;
