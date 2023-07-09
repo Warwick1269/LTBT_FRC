@@ -13,7 +13,7 @@ Arm::Arm(/* args */)
  * @param speed the speed at which to bend the arm (double)
  * @param smooth the smoothness of the arm movement (double)
  */
-void Arm::ArmBendOne(double speed, double smooth)
+void Arm::ArmBendOne(double maxSpeed, double smooth)
 {
     frc::SlewRateLimiter<units::scalar> filter{smooth / 1_s};	
 
@@ -26,7 +26,7 @@ void Arm::ArmBendOne(double speed, double smooth)
     }
     else
     {
-        bendOne.Set(leftJoy * speed);
+        bendOne.Set(leftJoy * maxSpeed);
     }
 
 }
@@ -37,7 +37,7 @@ void Arm::ArmBendOne(double speed, double smooth)
  * @param speed the speed at which to bend the arm (double)
  * @param smooth the smoothness of the arm movement (double)
  */
-void Arm::ArmBendTwo(double speed, double smooth) 
+void Arm::ArmBendTwo(double maxSpeed, double smooth) 
 {
     frc::SlewRateLimiter<units::scalar> filter{smooth / 1_s};
 
@@ -49,7 +49,7 @@ void Arm::ArmBendTwo(double speed, double smooth)
     }
     else
     {
-        bendTwo.Set(rightJoy * speed);
+        bendTwo.Set(rightJoy * maxSpeed);
     } 
 }
 

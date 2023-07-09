@@ -26,8 +26,8 @@ private:
 
 public:
     Arm(/* args */);
-    void ArmBendOne(double speed, double smooth);
-    void ArmBendTwo(double speed, double smooth);
+    void ArmBendOne(double maxSpeed, double smooth);
+    void ArmBendTwo(double maxSpeed, double smooth);
     void Intake(double speed);
 
 };
