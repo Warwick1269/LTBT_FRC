@@ -7,7 +7,6 @@
 // 
 // 
 // 
-// arguments in order: deadZone, maxSpeed
 
 /// @brief This is the class containing all the drive functions and *exposed* variables.
 /// Drive constructor: 
@@ -38,7 +37,7 @@ private:
 
 	// Mecanum Drive
 	frc::MecanumDrive mec_drive{frontL, backL, frontR, backR};
-	double _manualGyro = 0;
+	double _gyro = 0;
 
 
 	// Other
@@ -51,8 +50,11 @@ public:
 	void MecDrive(); // Call this for MecanumDrive bases 
 	void TrainDrive(); // Call this for Drive Trains
 
-	void TimedAutoMecDrive(int timeMS, double speedX, double speedY, double rotationZ, double fieldOrient);
-	void TimedAutoTrainDrive(int timeMS, double speedL, double speedR);
+	// RAW FUNCTIONS for interfacing with drive base 
+	void RawMecDrive(double speedX, double speedY, double rotationZ, double fieldOrient);
+	void RawTrainDrive(double speedL, double speedR);
+	void StopDrives();
+	void SetDriveSafety(bool enabled);
 	
 	
 };
