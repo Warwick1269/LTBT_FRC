@@ -38,6 +38,7 @@ private:
 	// Mecanum Drive
 	frc::MecanumDrive mec_drive{frontL, backL, frontR, backR};
 	double _gyro = 0;
+	bool _mecanumDriveEnabled = false;
 
 
 	// Other

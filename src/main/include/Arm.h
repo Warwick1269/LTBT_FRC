@@ -1,16 +1,15 @@
+#include "Robot.h"
+
 class Arm
 {
 private:
-    /* data */
+
+    frc::Joystick controller{0};
+
 public:
     Arm(/* args */);
-    ~Arm();
+    void ArmBendOne();
+    void ArmBendTwo();
+
 };
 
-Arm::Arm(/* args */)
-{
-}
-
-Arm::~Arm()
-{
-}
