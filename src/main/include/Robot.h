@@ -29,9 +29,6 @@ class Robot : public frc::TimedRobot {
   
  private:
     // Other
-	WPI_VictorSPX lifter {5};
-	WPI_VictorSPX feed {6};
-	WPI_VictorSPX flywheel {7};
 
 	frc::Joystick controller{0};
 };
