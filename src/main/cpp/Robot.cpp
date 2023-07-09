@@ -10,14 +10,11 @@
 #include <thread>
 #include "Drive.h"
 #include "Auto.h"
+#include "Arm.h"
 
 #include <frc/smartdashboard/SmartDashboard.h>
 
 
-double triggerDeadZone = 0.01;
-// bool lock = false;
-double flySpeed = 0;
-double feedSpeed = 0.75;
 bool latch = true;
 void Robot::RobotInit() {
 	std::cout << "-- LTBT Robot Program Start --" << std::endl;
@@ -30,6 +27,8 @@ void Robot::AutonomousInit()
 	Auto newAuto;
 
 	newAuto.TimedAutoMecDrive(1000, 0, 0.1, 0, 0);
+
+	newAuto.TimedAutoIntake(2000, 0.75);
 }
 
 void Robot::AutonomousPeriodic() 
@@ -63,84 +62,17 @@ void Robot::TeleopPeriodic()
 	// // call MecDrive for mecanum drive control
 	newMec.MecDrive();
 
+	// Create new arm object
+	Arm newArm;
 
-	int leftTrigger = controller.GetRawAxis(2);
-	int rightTrigger = controller.GetRawAxis(3);
-
-	int xButton = controller.GetRawButton(3);
-	int bButton = controller.GetRawButton(2);
-	int yButton = controller.GetRawButton(4);
-
-	int lBumper = controller.GetRawButton(5);
-	int rBumper = controller.GetRawButton(6);
-
-
-	// Left drivetrain
-
-		
-	// Lifter
-	//FINE TUNE DELAYS
-	using namespace std::this_thread;
-	using namespace std::chrono;
-	
-//sleep_set(nanoseconds())
- 
-	
-	if (rightTrigger != 0) {
-		lifter.Set(-0.7);
-	} else if (leftTrigger != 0) {
-		lifter.Set(0.7);
-	} else {
-		lifter.Set(0);
-	}
+	// Drive bend one
+	newArm.ArmBendOne(0.5, 0.5);
+	// Drive bend two
+	newArm.ArmBendTwo(0.5, 0.5);
+	// Drive intake
+	newArm.Intake(0.75);
 
 
-	// feed wheel
-	if (rBumper != 0) {
-		feed.Set(feedSpeed);
-	} else if (lBumper != 0) {
-		feed.Set(-feedSpeed);
-	} else {
-		feed.Set(0);
-	}
-	// flywheel
-
-	if (yButton !=0 && flySpeed <= 0.01){//on
-	for (int i =0; i < 100; i++) {
-		flySpeed += 0.01;
-		flywheel.Set(-flySpeed);
-		SmartDashboard::PutString("DB/String 0", "Spinning wheel");
-		sleep_for(nanoseconds(50000000));
-		if (flySpeed > 0.98) {
-			SmartDashboard::PutString("DB/String 0", "Ready!");
-		}
-		if (bButton !=0) {
-			break;
-		}
-	};
-
-	} 
-	else if (xButton !=0 && flySpeed <= 0.01) {
-	for (int i =0; i < 60; i++) {
-		flySpeed += 0.01;
-		flywheel.Set(-flySpeed);
-		SmartDashboard::PutString("DB/String 0", "Spinning wheel");
-		sleep_for(nanoseconds(50000000));
-		if (flySpeed > 0.58) {
-			SmartDashboard::PutString("DB/String 0", "Ready!");
-		}
-		if (bButton !=0) {
-			break;
-		}
-	};
-			
-	}
-
-	else if (bButton !=0) {//off
-		flywheel.Set(0);
-		flySpeed = 0;
-	}
-	
 
 }
 
@@ -151,13 +83,11 @@ void Robot::DisabledPeriodic() {}
 
 void Robot::TestInit() {}
 
-void Robot::TestPeriodic() {
-	using namespace std::this_thread;
-	using namespace std::chrono;
-}
+void Robot::TestPeriodic() {}
 
 #ifndef RUNNING_FRC_TESTS
-int main() {
+int main() 
+{
   return frc::StartRobot<Robot>();
 }
 #endif
