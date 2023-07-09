@@ -1,5 +1,6 @@
 #include "Auto.h"
 #include "Drive.h"
+#include "Arm.h"
 
 Auto::Auto(/* args */)
 {
@@ -57,4 +58,18 @@ void Auto::TimedAutoMecDrive(int timeMS, double speedX, double speedY, double ro
     autoMecDrive.StopDrives();
 
 	// autoMecDrive.SetDriveSafety(true);
+}
+
+void Auto::TimedAutoIntake(int timeMS, double speed)
+{
+	Arm autoIntake;
+
+	using namespace std::this_thread;
+	using namespace std::chrono;
+
+	autoIntake.RawIntake(speed);
+
+	sleep_for(milliseconds(timeMS));
+
+	autoIntake.RawIntake(0);
 }

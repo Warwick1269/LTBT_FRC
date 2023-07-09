@@ -15,6 +15,7 @@ public:
     
 	void TimedAutoMecDrive(int timeMS, double speedX, double speedY, double rotationZ, double fieldOrient);
 	void TimedAutoTrainDrive(int timeMS, double speedL, double speedR);
+    void TimedAutoIntake(int timeMS, double speed);
 
 };
 

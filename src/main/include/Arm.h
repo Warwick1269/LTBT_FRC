@@ -30,5 +30,7 @@ public:
     void ArmBendTwo(double maxSpeed, double smooth);
     void Intake(double speed);
 
+	// Raw Functions
+	void RawIntake(double speed);
 };
 

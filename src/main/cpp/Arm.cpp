@@ -69,3 +69,8 @@ void Arm::Intake(double speed)
         intake.Set(0);
     }
 }
+
+void Arm::RawIntake(double speed)
+{
+    intake.Set(speed);
+}

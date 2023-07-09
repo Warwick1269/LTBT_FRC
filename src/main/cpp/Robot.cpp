@@ -31,6 +31,8 @@ void Robot::AutonomousInit()
 	Auto newAuto;
 
 	newAuto.TimedAutoMecDrive(1000, 0, 0.1, 0, 0);
+
+	newAuto.TimedAutoIntake(2000, 0.75);
 }
 
 void Robot::AutonomousPeriodic() 
