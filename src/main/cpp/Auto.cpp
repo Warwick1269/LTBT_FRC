@@ -1,4 +1,5 @@
 #include "Auto.h"
+#include "Drive.h"
 
 Auto::Auto(/* args */)
 {
@@ -20,7 +21,7 @@ void Auto::TimedAutoTrainDrive(int timeMS, double speedL, double speedR)
     using namespace std::this_thread;
 	using namespace std::chrono;
 
-	// autoTrainDrive.SetSafetyEnabled(false);
+	// // autoTrainDrive.SetSafetyEnabled(false);
 
 	autoTrainDrive.RawTrainDrive(speedL, speedR);
 		
@@ -47,7 +48,7 @@ void Auto::TimedAutoMecDrive(int timeMS, double speedX, double speedY, double ro
 	using namespace std::this_thread;
 	using namespace std::chrono;
 	
-	// autoMecDrive.SetDriveSafety(false);
+	// // autoMecDrive.SetDriveSafety(false);
 
     autoMecDrive.RawMecDrive(speedX, speedY, rotationZ, fieldOrient);
 	

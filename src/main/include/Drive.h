@@ -7,7 +7,6 @@
 // 
 // 
 // 
-// arguments in order: deadZone, maxSpeed
 
 /// @brief This is the class containing all the drive functions and *exposed* variables.
 /// Drive constructor: 

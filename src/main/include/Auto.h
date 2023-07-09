@@ -1,4 +1,5 @@
-#include "Drive.h"
+// #include "Drive.h"
+#include "Robot.h"
 #include <thread>
 #include <chrono>
 
@@ -15,6 +16,5 @@ public:
 	void TimedAutoMecDrive(int timeMS, double speedX, double speedY, double rotationZ, double fieldOrient);
 	void TimedAutoTrainDrive(int timeMS, double speedL, double speedR);
 
-    ~Auto();
 };
 
