@@ -10,6 +10,7 @@
 #include <thread>
 #include "Drive.h"
 #include "Auto.h"
+#include "Arm.h"
 
 #include <frc/smartdashboard/SmartDashboard.h>
 
@@ -62,6 +63,17 @@ void Robot::TeleopPeriodic()
 	Drive newMec(0.02, 0.8);
 	// // call MecDrive for mecanum drive control
 	newMec.MecDrive();
+
+	// Create new arm object
+	Arm newArm;
+
+	// Drive bend one
+	newArm.ArmBendOne(0.5, 0.5);
+	// Drive bend two
+	newArm.ArmBendTwo(0.5, 0.5);
+	// Drive intake
+	newArm.Intake(0.75);
+
 
 
 }

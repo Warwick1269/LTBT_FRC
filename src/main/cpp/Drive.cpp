@@ -22,8 +22,6 @@ Drive::Drive(double deadZone, double maxSpeed)
 
 void Drive::MecDrive()
 {
-	_mecanumDriveEnabled = true;
-	
 	//NOTE: You need to create a new SlewRateLimiter for each value you want to smooth. 
 	//They will collide if you use the same SlewRateLimiter for multiple values.
 
@@ -54,10 +52,7 @@ void Drive::TrainDrive()
 	double rightJoy = controller.GetRawAxis(5);
 	
 	// left motor speed, right motor speed, square joystick intensity true/false
-	if (_mecanumDriveEnabled == false) 
-	{ 
-		tank_drive.TankDrive(leftJoy, rightJoy, true);	
-	}
+	tank_drive.TankDrive(leftJoy, rightJoy, true);	
 }
 
 /// RAW FUNCTIONS
