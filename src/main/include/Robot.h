@@ -28,7 +28,5 @@ class Robot : public frc::TimedRobot {
   void TestPeriodic() override;
   
  private:
-    // Other
 
-	frc::Joystick controller{0};
 };
