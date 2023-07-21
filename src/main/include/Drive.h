@@ -4,9 +4,6 @@
 #include <frc/motorcontrol/MotorControllerGroup.h>
 #include <frc/drive/DifferentialDrive.h>
 
-// 
-// 
-// 
 
 /// @brief This is the class containing all the drive functions and *exposed* variables.
 /// Drive constructor: 
