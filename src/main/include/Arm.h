@@ -32,5 +32,6 @@ public:
 
 	// Raw Functions
 	void RawIntake(double speed);
+	void RawBendOne(double speed);
 };
 
