@@ -74,18 +74,18 @@ void Auto::TimedAutoIntake(int timeMS, double speed)
 	autoIntake.RawIntake(0);
 }
 
-void TimedAutoArmBend(int timeMS, double speed)
+void TimedAutoArmBendTwo(int timeMS, double speed)
 {
 	Arm autoArmBend;
 
 	using namespace std::this_thread;
 	using namespace std::chrono;
 
-	autoArmBend.RawBendOne(speed);
+	autoArmBend.RawBendTwo(speed);
 
 	sleep_for(milliseconds(timeMS));
 
-	autoArmBend.RawBendOne(0);
+	autoArmBend.RawBendTwo(0);
 
 
 }
