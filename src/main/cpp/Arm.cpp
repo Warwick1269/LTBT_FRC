@@ -74,3 +74,8 @@ void Arm::RawIntake(double speed)
 {
     intake.Set(speed);
 }
+
+void Arm::RawBendTwo(double speed)
+{
+    bendTwo.Set(speed);
+}
