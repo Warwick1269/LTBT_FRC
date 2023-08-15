@@ -13,7 +13,7 @@ deploy {
             // or from command line. If not found an exception will be thrown.
             // You can use getTeamOrDefault(team) instead of getTeamNumber if you
             // want to store a team number in this file.
-            team = 9066
+            team = 9986
             debug = project.frc.getDebugOrDefault(false)
 
             artifacts {
