@@ -14,13 +14,13 @@ class Drive
 {
 private:
 	// Left
-	WPI_VictorSPX frontL {1};
-	WPI_VictorSPX backL {2};
+	WPI_VictorSPX frontL {4};
+	WPI_VictorSPX backL {5};
 
 
 	// Right
 	WPI_VictorSPX frontR {3};
-	WPI_VictorSPX backR {4};
+	WPI_VictorSPX backR {2};
 
 	// controller declarations
 	frc::Joystick controller{0};

@@ -62,17 +62,20 @@ void Arm::Intake(double speed)
 {
     if (_rBumper)
     {
-        intake.Set(speed);
+        intake1.Set(speed);
+        intake2.Set(speed);
     }
     else
     {
-        intake.Set(0);
+        intake1.Set(0);
+        intake2.Set(0);
     }
 }
 
 void Arm::RawIntake(double speed)
 {
-    intake.Set(speed);
+    intake1.Set(speed);
+    intake2.Set(speed);
 }
 
 void Arm::RawBendTwo(double speed)

@@ -6,9 +6,10 @@ private:
 
     frc::Joystick controller{0};
 
-	WPI_VictorSPX bendOne {5};
-	WPI_VictorSPX bendTwo {6};
-	WPI_VictorSPX intake {7};
+	WPI_VictorSPX bendOne {6};
+	WPI_VictorSPX bendTwo {1};
+	WPI_VictorSPX intake1 {0};
+	WPI_VictorSPX intake2 {7};
 
 
 	int _leftTrigger = controller.GetRawAxis(2);
