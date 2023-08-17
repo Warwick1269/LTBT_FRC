@@ -60,6 +60,12 @@ void Auto::TimedAutoMecDrive(int timeMS, double speedX, double speedY, double ro
 	// autoMecDrive.SetDriveSafety(true);
 }
 
+/**
+ * @brief the Auto Timed Auto Intake routine.
+ *
+ * @param timeMS the duration in milliseconds to run the intake
+ * @param speed the speed at which to run the intake
+ */
 void Auto::TimedAutoIntake(int timeMS, double speed)
 {
 	Arm autoIntake;
@@ -74,6 +80,14 @@ void Auto::TimedAutoIntake(int timeMS, double speed)
 	autoIntake.RawIntake(0);
 }
 
+/**
+ * @brief The TimedAutoArmBendTwo function is used to perform a timed auto arm bending movement. 
+ * The function takes in two parameters: `timeMS` (the duration of the arm bending movement in milliseconds) 
+ * and `speed` (the speed of the arm bending movement). 
+ * 
+ * @param timeMS The duration of the arm bending movement in milliseconds.
+ * @param speed The speed of the arm bending movement.
+ */
 void Auto::TimedAutoArmBendTwo(int timeMS, double speed)
 {
 	Arm autoArmBend;
