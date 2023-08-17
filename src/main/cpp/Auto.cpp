@@ -74,7 +74,7 @@ void Auto::TimedAutoIntake(int timeMS, double speed)
 	autoIntake.RawIntake(0);
 }
 
-void TimedAutoArmBendTwo(int timeMS, double speed)
+void Auto::TimedAutoArmBendTwo(int timeMS, double speed)
 {
 	Arm autoArmBend;
 
