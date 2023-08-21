@@ -65,6 +65,11 @@ void Arm::Intake(double speed)
         intake1.Set(speed);
         intake2.Set(speed);
     }
+    if (_lBumper)
+    {
+        intake1.Set(-speed);
+        intake2.Set(-speed);
+    }
     else
     {
         intake1.Set(0);
