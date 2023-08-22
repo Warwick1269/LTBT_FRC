@@ -13,7 +13,7 @@ public:
     Auto(/* args */);
 
     
-	void TimedAutoMecDrive(int timeMS, double speedX, double speedY, double rotationZ, double fieldOrient);
+	void TimedAutoMecDrive(int timeMS, double speedX, double speedY, double rotationZ);
 	void TimedAutoTrainDrive(int timeMS, double speedL, double speedR);
     void TimedAutoIntake(int timeMS, double speed);
     void TimedAutoArmBendTwo(int timeMS, double speed);

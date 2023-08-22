@@ -34,7 +34,6 @@ private:
 
 	// Mecanum Drive
 	frc::MecanumDrive mec_drive{frontL, backL, frontR, backR};
-	double _gyro = 0;
 
 
 	// Other
@@ -48,7 +47,7 @@ public:
 	void TrainDrive(); // Call this for Drive Trains
 
 	// RAW FUNCTIONS for interfacing with drive base 
-	void RawMecDrive(double speedX, double speedY, double rotationZ, double fieldOrient);
+	void RawMecDrive(double speedX, double speedY, double rotationZ);
 	void RawTrainDrive(double speedL, double speedR);
 	void StopDrives();
 	void SetDriveSafety(bool enabled);

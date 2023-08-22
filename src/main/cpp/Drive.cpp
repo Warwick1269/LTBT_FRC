@@ -39,7 +39,7 @@ void Drive::MecDrive()
 	double joyXPower = joyX * fabs(joyX);
 	
 	// y speed, x speed, rotation, feild orientation compensation angle
-	mec_drive.DriveCartesian(joyYPower, joyXPower, -joystick.GetZ(), _gyro);
+	mec_drive.DriveCartesian(joyYPower, joyXPower, -joystick.GetZ());
 	
 
 }
@@ -57,9 +57,9 @@ void Drive::TrainDrive()
 
 /// RAW FUNCTIONS
 
-void Drive::RawMecDrive(double speedX, double speedY, double rotationZ, double fieldOrient)
+void Drive::RawMecDrive(double speedX, double speedY, double rotationZ)
 {
-	mec_drive.DriveCartesian(speedX, speedY, rotationZ, fieldOrient);
+	mec_drive.DriveCartesian(speedX, speedY, rotationZ);
 }
 
 void Drive::RawTrainDrive(double speedL, double speedR)

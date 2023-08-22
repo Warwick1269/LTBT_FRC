@@ -42,7 +42,7 @@ void Auto::TimedAutoTrainDrive(int timeMS, double speedL, double speedR)
  * gyroAngle – The current angle reading from the gyro in degrees around the Z axis. Use this to implement field-oriented controls.
  * @param fieldOrient in Rads.
  */
-void Auto::TimedAutoMecDrive(int timeMS, double speedX, double speedY, double rotationZ, double fieldOrient)
+void Auto::TimedAutoMecDrive(int timeMS, double speedX, double speedY, double rotationZ)
 {
     Drive autoMecDrive(0.02, 0.8);
 
@@ -51,7 +51,7 @@ void Auto::TimedAutoMecDrive(int timeMS, double speedX, double speedY, double ro
 	
 	// // autoMecDrive.SetDriveSafety(false);
 
-    autoMecDrive.RawMecDrive(speedX, speedY, rotationZ, fieldOrient);
+    autoMecDrive.RawMecDrive(speedX, speedY, rotationZ);
 	
 	sleep_for(milliseconds(timeMS));
 

@@ -26,7 +26,7 @@ void Robot::AutonomousInit()
 {
 	Auto newAuto;
 
-	newAuto.TimedAutoMecDrive(1000, 0, 0.1, 0, 0);
+	newAuto.TimedAutoMecDrive(1000, 0.0, 0.1, 0.0);
 
 	newAuto.TimedAutoArmBendTwo(1000, 0.1);
 
