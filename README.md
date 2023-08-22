@@ -6,9 +6,10 @@
 - refresh C++ intellisense
 - install WPIlib tools
 - install g++
+- Delete the `Phoenix.json` file.
+- Install vender library for phoenix motor drivers using the following link: [](https://maven.ctr-electronics.com/release/com/ctre/phoenix/Phoenix5-frc2023-latest.json).
 - gradle build
 - done.
-- (note these steps are just a reminder for how I got everything working, will make a more detailed version later)
 - (note these steps are just a reminder for how I got everything working, will make a more detailed version later)
 
 ## How to not get in code dept:
