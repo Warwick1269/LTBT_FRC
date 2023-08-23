@@ -15,7 +15,6 @@ Arm::Arm(/* args */)
  */
 void Arm::ArmBendOne(double maxSpeed)
 {
-
     double leftPower = _leftJoy * fabs(_leftJoy);
     
     if (_bButton)
@@ -56,6 +55,9 @@ void Arm::ArmBendTwo(double maxSpeed)
  */
 void Arm::Intake(double speed)
 {
+	int _lBumper = controller.GetRawButton(5);
+	int _rBumper = controller.GetRawButton(6);
+
     if (_rBumper)
     {
         intake1.Set(speed);
