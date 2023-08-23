@@ -4,7 +4,7 @@ class Arm
 {
 private:
 
-    frc::Joystick controller{1};
+    frc::Joystick controller{2};
 
 	WPI_VictorSPX bendOne {6};
 	WPI_VictorSPX bendTwo {1};
@@ -27,8 +27,8 @@ private:
 
 public:
     Arm(/* args */);
-    void ArmBendOne(double maxSpeed, double smooth);
-    void ArmBendTwo(double maxSpeed, double smooth);
+    void ArmBendOne(double maxSpeed);
+    void ArmBendTwo(double maxSpeed);
     void Intake(double speed);
 
 	// Raw Functions

@@ -13,21 +13,17 @@ Arm::Arm(/* args */)
  * @param speed the speed at which to bend the arm (double)
  * @param smooth the smoothness of the arm movement (double)
  */
-void Arm::ArmBendOne(double maxSpeed, double smooth)
+void Arm::ArmBendOne(double maxSpeed)
 {
-    frc::SlewRateLimiter<units::scalar> filter{smooth / 1_s};	
-	double _leftJoy = -controller.GetRawAxis(1); 
-
-    double leftJoy = filter.Calculate(_leftJoy); 
+    double leftPower = _leftJoy * fabs(_leftJoy);
     
-
     if (_bButton)
     {
         bendOne.Set(0);
     }
     else
     {
-        bendOne.Set(leftJoy * maxSpeed);
+        bendOne.Set(leftPower * maxSpeed);
     }
 
 }
@@ -38,12 +34,9 @@ void Arm::ArmBendOne(double maxSpeed, double smooth)
  * @param speed the speed at which to bend the arm (double)
  * @param smooth the smoothness of the arm movement (double)
  */
-void Arm::ArmBendTwo(double maxSpeed, double smooth) 
+void Arm::ArmBendTwo(double maxSpeed) 
 {
-    frc::SlewRateLimiter<units::scalar> filter{smooth / 1_s};
-	double _rightJoy = controller.GetRawAxis(5);
-
-    double rightJoy = filter.Calculate(_rightJoy);
+    double rightPower = _rightJoy * fabs(_rightJoy);
 
     if (_bButton)
     {
@@ -51,7 +44,7 @@ void Arm::ArmBendTwo(double maxSpeed, double smooth)
     }
     else
     {
-        bendTwo.Set(rightJoy * maxSpeed);
+        bendTwo.Set(rightPower * maxSpeed);
     } 
 }
 
