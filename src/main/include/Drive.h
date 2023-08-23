@@ -23,8 +23,8 @@ private:
 	WPI_VictorSPX backR {2};
 
 	// controller declarations
-	frc::Joystick controller{1};
-	frc::Joystick joystick{2};
+	frc::Joystick controller{2};
+	frc::Joystick joystick{1};
 
 	// Drive train	
 	frc::MotorControllerGroup m_left{frontL, backL};
