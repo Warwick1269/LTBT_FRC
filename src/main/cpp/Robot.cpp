@@ -63,23 +63,8 @@ void Robot::TeleopPeriodic()
 	using namespace frc;
 	// create drive object	
 	// DeadZone, MaxSpeed
-	// Drive newMec(0.02, 0.8);
-	// // call MecDrive for mecanum drive control
-	
-	// frc::SlewRateLimiter<units::scalar> filterY{0.5 / 1_s};	
-	// // Smooth the joystick X for every unit of time
-	// frc::SlewRateLimiter<units::scalar> filterX{0.5 / 1_s};
-
-	//Applies the slew rate limiter
-	// double joyY = filterY.Calculate(joystick.GetY());
-	// double joyX = filterX.Calculate(-joystick.GetX());
-
-	// squares joystick intensity for finer control. This is not done for mecanum drive but is automatically done for drive train
-	double joyYPower = -joystick.GetX() * fabs(joystick.GetX());
-	double joyXPower = joystick.GetY() * fabs(joystick.GetY());
-	
-	// y speed, x speed, rotation, feild orientation compensation angle
-	mec_drive.DriveCartesian(joyYPower, joyXPower, -joystick.GetZ());
+	Drive newMec(0.02, 0.8);
+	newMec.MecDrive();
 
 	// Create new arm object
 	Arm newArm;

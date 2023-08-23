@@ -55,8 +55,6 @@ void Arm::ArmBendTwo(double maxSpeed)
  */
 void Arm::Intake(double speed)
 {
-	int _lBumper = controller.GetRawButton(5);
-	int _rBumper = controller.GetRawButton(6);
 
     if (_rBumper)
     {

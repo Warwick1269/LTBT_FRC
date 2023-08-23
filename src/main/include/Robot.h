@@ -28,14 +28,5 @@ class Robot : public frc::TimedRobot {
   void TestPeriodic() override;
   
  private:
-	WPI_VictorSPX frontL {4};
-	WPI_VictorSPX backL {5};
 
-
-	// Right
-	WPI_VictorSPX frontR {3};
-	WPI_VictorSPX backR {2};
-
-	frc::MecanumDrive mec_drive{frontL, backL, frontR, backR};
-	frc::Joystick joystick{1};
 };

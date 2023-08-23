@@ -43,7 +43,7 @@ private:
 public:
     Drive(double joySense, double deadZone); // This is the constructor function, which is called when the class is instantiated
 	
-	void MecDrive(double joystickY, double joystickX); // Call this for MecanumDrive bases 
+	void MecDrive(); // Call this for MecanumDrive bases 
 	void TrainDrive(); // Call this for Drive Trains
 
 	// RAW FUNCTIONS for interfacing with drive base 
