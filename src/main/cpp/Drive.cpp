@@ -20,7 +20,7 @@ Drive::Drive(double deadZone, double maxSpeed)
 
 }
 
-void Drive::MecDrive()
+void Drive::MecDrive(double joystickY, double joystickX)
 {
 	//NOTE: You need to create a new SlewRateLimiter for each value you want to smooth. 
 	//They will collide if you use the same SlewRateLimiter for multiple values.
@@ -31,7 +31,7 @@ void Drive::MecDrive()
 	frc::SlewRateLimiter<units::scalar> filterX{0.5 / 1_s};
 
 	//Applies the slew rate limiter
-	double joyY = filterY.Calculate(-joystick.GetY());
+	double joyY = filterY.Calculate(joystickY);
 	double joyX = filterX.Calculate(-joystick.GetX());
 
 	// squares joystick intensity for finer control. This is not done for mecanum drive but is automatically done for drive train
