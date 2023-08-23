@@ -4,7 +4,7 @@ class Arm
 {
 private:
 
-    frc::Joystick controller{0};
+    frc::Joystick controller{1};
 
 	WPI_VictorSPX bendOne {6};
 	WPI_VictorSPX bendTwo {1};
