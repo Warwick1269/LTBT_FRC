@@ -16,6 +16,7 @@ Arm::Arm(/* args */)
 void Arm::ArmBendOne(double maxSpeed, double smooth)
 {
     frc::SlewRateLimiter<units::scalar> filter{smooth / 1_s};	
+	double _leftJoy = -controller.GetRawAxis(1); 
 
     double leftJoy = filter.Calculate(_leftJoy); 
     
@@ -40,6 +41,7 @@ void Arm::ArmBendOne(double maxSpeed, double smooth)
 void Arm::ArmBendTwo(double maxSpeed, double smooth) 
 {
     frc::SlewRateLimiter<units::scalar> filter{smooth / 1_s};
+	double _rightJoy = controller.GetRawAxis(5);
 
     double rightJoy = filter.Calculate(_rightJoy);
 
