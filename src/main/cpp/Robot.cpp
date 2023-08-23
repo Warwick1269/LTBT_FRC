@@ -26,7 +26,7 @@ void Robot::AutonomousInit()
 {
 	Auto newAuto;
 
-	newAuto.TimedAutoMecDrive(1000, 0.0, 0.1, 0.0);
+	newAuto.TimedAutoMecDrive(1000, 0.0, 0.2, 0.0);
 
 	newAuto.TimedAutoArmBendTwo(1000, 0.1);
 
@@ -68,11 +68,11 @@ void Robot::TeleopPeriodic()
 	Arm newArm;
 
 	// Drive bend one
-	newArm.ArmBendOne(0.5, 0.5);
+	newArm.ArmBendOne(0.5);
 	// Drive bend two
-	newArm.ArmBendTwo(0.5, 0.5);
+	newArm.ArmBendTwo(0.5);
 	// Drive intake
-	newArm.Intake(0.75);
+	newArm.Intake(0.5);
 
 
 
