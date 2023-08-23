@@ -38,11 +38,11 @@ void Drive::MecDrive()
 void Drive::TrainDrive()
 {
 	// assign joystick values
-	double leftJoy = -controller.GetRawAxis(1); 
-	double rightJoy = controller.GetRawAxis(5);
+	// double leftJoy = -controller.GetRawAxis(1); 
+	// double rightJoy = controller.GetRawAxis(5);
 	
-	// left motor speed, right motor speed, square joystick intensity true/false
-	tank_drive.TankDrive(leftJoy, rightJoy, true);	
+	// // left motor speed, right motor speed, square joystick intensity true/false
+	// tank_drive.TankDrive(leftJoy, rightJoy, true);	
 }
 
 /// RAW FUNCTIONS
