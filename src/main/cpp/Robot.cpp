@@ -29,11 +29,12 @@ void Robot::AutonomousInit()
 {
 	Auto newAuto;
 
-	newAuto.TimedAutoMecDrive(1000, 0.0, 0.2, 0.0);
 
 	newAuto.TimedAutoArmBendTwo(1000, 0.1);
 
 	newAuto.TimedAutoIntake(2000, -0.5);
+
+	newAuto.TimedAutoMecDrive(1000, 0.0, -0.2, 0.0);
 }
 
 void Robot::AutonomousPeriodic() 
