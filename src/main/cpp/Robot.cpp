@@ -75,8 +75,8 @@ void Robot::TeleopPeriodic()
 	// double joyX = filterX.Calculate(-joystick.GetX());
 
 	// squares joystick intensity for finer control. This is not done for mecanum drive but is automatically done for drive train
-	double joyYPower = joystick.GetX() * fabs(joystick.GetX());
-	double joyXPower = -joystick.GetY() * fabs(joystick.GetY());
+	double joyYPower = -joystick.GetX() * fabs(joystick.GetX());
+	double joyXPower = joystick.GetY() * fabs(joystick.GetY());
 	
 	// y speed, x speed, rotation, feild orientation compensation angle
 	mec_drive.DriveCartesian(joyYPower, joyXPower, -joystick.GetZ());
