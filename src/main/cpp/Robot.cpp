@@ -70,7 +70,7 @@ void Robot::TeleopPeriodic()
 	double joyZPower = joystick.GetZ() * fabs(joystick.GetZ());
 	double joyXPower;
 
-	if (joyYPower > 0.1)
+	if (fabs(joyYPower) > 0.1)
 	{
 		joyXPower = joystick.GetX() * fabs(joystick.GetX()) * 0.15;
 	}
