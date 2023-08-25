@@ -19,6 +19,8 @@
 
 
 bool latch = true;
+double maxSpeed = 0.8;
+double speed = 0.5;
 void Robot::RobotInit() {
 	std::cout << "-- LTBT Robot Program Start --" << std::endl;
 }
@@ -29,10 +31,13 @@ void Robot::AutonomousInit()
 {
 	Auto newAuto;
 
+	
 
 	newAuto.TimedAutoArmBendTwo(3000, -0.5);
 
 	newAuto.TimedAutoIntake(2000, -0.5);
+
+	newAuto.ArmStop();
 
 	newAuto.TimedAutoMecDrive(1000, 0.0, -0.2, 0.0);
 }
@@ -64,20 +69,46 @@ void Robot::TeleopPeriodic()
 	using namespace frc;
 	// create drive object	
 	// DeadZone, MaxSpeed
-	Drive newMec(0.02, 0.8);
-	newMec.MecDrive(joystick.GetY(), joystick.GetX(), joystick.GetZ());
+	// Drive newMec(0.02, 0.8);
+	double joyYPower = joystick.GetY() * fabs(joystick.GetY());
+	double joyXPower = joystick.GetX() * fabs(joystick.GetX());
+	double joyZPower = joystick.GetZ() * fabs(joystick.GetZ());
+
+	frc::MecanumDrive mec_drive{frontL, backL, frontR, backR};
 
 	// Create new arm object
-	Arm newArm;
-
-	// Drive bend one
-	newArm.ArmBendOne(0.5);
-	// Drive bend two
-	newArm.ArmBendTwo(0.5);
-	// Drive intake
-	newArm.Intake(0.5);
 
 
+    double leftPower = _leftJoy * fabs(_leftJoy);
+    double rightPower = _rightJoy * fabs(_rightJoy);
+    
+    if (_bButton)
+    {
+        bendOne.Set(0);
+		bendTwo.Set(0);
+    }
+    else
+    {
+        bendOne.Set(leftPower * maxSpeed);
+        bendTwo.Set(rightPower * maxSpeed);
+    }
+
+
+    if (_rBumper)
+    {
+        intake1.Set(speed);
+        intake2.Set(-speed);
+    }
+    if (_lBumper)
+    {
+        intake1.Set(-speed);
+        intake2.Set(speed);
+    }
+    else
+    {
+        intake1.Set(0);
+        intake2.Set(0);
+    }
 
 }
 

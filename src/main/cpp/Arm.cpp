@@ -76,10 +76,16 @@ void Arm::Intake(double speed)
 void Arm::RawIntake(double speed)
 {
     intake1.Set(speed);
-    intake2.Set(speed);
+    intake2.Set(-speed);
 }
 
 void Arm::RawBendTwo(double speed)
 {
     bendTwo.Set(speed);
+}
+
+void Arm::ArmSafety(bool enabled)
+{
+    bendOne.SetSafetyEnabled(enabled);
+    bendTwo.SetSafetyEnabled(enabled);
 }

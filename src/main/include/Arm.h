@@ -34,5 +34,6 @@ public:
 	// Raw Functions
 	void RawIntake(double speed);
 	void RawBendTwo(double speed);
+	void ArmSafety(bool enabled);
 };
 

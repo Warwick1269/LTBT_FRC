@@ -17,6 +17,7 @@ public:
 	void TimedAutoTrainDrive(int timeMS, double speedL, double speedR);
     void TimedAutoIntake(int timeMS, double speed);
     void TimedAutoArmBendTwo(int timeMS, double speed);
+	void ArmStop();
 
 };
 

@@ -49,7 +49,7 @@ void Auto::TimedAutoMecDrive(int timeMS, double speedX, double speedY, double ro
 	using namespace std::this_thread;
 	using namespace std::chrono;
 	
-	// // autoMecDrive.SetDriveSafety(false);
+	autoMecDrive.SetDriveSafety(false);
 
     autoMecDrive.RawMecDrive(speedX, speedY, rotationZ);
 	
@@ -57,7 +57,7 @@ void Auto::TimedAutoMecDrive(int timeMS, double speedX, double speedY, double ro
 
     autoMecDrive.StopDrives();
 
-	// autoMecDrive.SetDriveSafety(true);
+	autoMecDrive.SetDriveSafety(true);
 }
 
 /**
@@ -92,6 +92,8 @@ void Auto::TimedAutoArmBendTwo(int timeMS, double speed)
 {
 	Arm autoArmBend;
 
+	autoArmBend.ArmSafety(false);
+
 	using namespace std::this_thread;
 	using namespace std::chrono;
 
@@ -99,7 +101,17 @@ void Auto::TimedAutoArmBendTwo(int timeMS, double speed)
 
 	sleep_for(milliseconds(timeMS));
 
+
+
+
+
+}
+
+void Auto::ArmStop()
+{
+	Arm autoArmBend;
+
 	autoArmBend.RawBendTwo(0);
 
-
+	autoArmBend.ArmSafety(true);
 }
