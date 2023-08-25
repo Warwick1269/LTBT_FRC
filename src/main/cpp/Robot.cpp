@@ -22,6 +22,7 @@
 bool latch = true;
 double maxSpeed = 0.5;
 double speed = 0.5;
+frc::SlewRateLimiter<units::scalar> filter{0.1 / 1_s};	
 void Robot::RobotInit() {
 	std::cout << "-- LTBT Robot Program Start --" << std::endl;
 }
@@ -88,8 +89,6 @@ void Robot::TeleopPeriodic()
 
 	// Create new arm object
 	double _leftJoy = -controller.GetRawAxis(1); 
-
-	frc::SlewRateLimiter<units::scalar> filter{0.1 / 1_s};	
 
     double leftJoy = filter.Calculate(_leftJoy); 
 
