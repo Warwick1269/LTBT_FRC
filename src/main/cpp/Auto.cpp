@@ -17,7 +17,7 @@ Auto::Auto(/* args */)
  */
 void Auto::TimedAutoTrainDrive(int timeMS, double speedL, double speedR) 
 {
-	Drive autoTrainDrive(0.02, 0.8);
+	Drive autoTrainDrive(0.02, 1);
     
     using namespace std::this_thread;
 	using namespace std::chrono;
@@ -44,7 +44,7 @@ void Auto::TimedAutoTrainDrive(int timeMS, double speedL, double speedR)
  */
 void Auto::TimedAutoMecDrive(int timeMS, double speedX, double speedY, double rotationZ)
 {
-    Drive autoMecDrive(0.02, 0.8);
+    Drive autoMecDrive(0.02, 1);
 
 	using namespace std::this_thread;
 	using namespace std::chrono;

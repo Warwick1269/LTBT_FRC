@@ -29,8 +29,6 @@ void Robot::AutonomousInit()
 {
 	Auto newAuto;
 
-	
-
 	newAuto.TimedAutoArmBendTwo(3000, -0.5);
 
 	newAuto.TimedAutoIntake(2000, -0.5);
