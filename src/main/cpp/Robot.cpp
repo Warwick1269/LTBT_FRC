@@ -65,7 +65,7 @@ void Robot::TeleopPeriodic()
 	// create drive object	
 	// DeadZone, MaxSpeed
 	Drive newMec(0.02, 0.8);
-	newMec.MecDrive(joystick.GetY(), joystick.GetX(), joystick.GetZ());
+	newMec.MecDrive();
 
 	// Create new arm object
 	Arm newArm;

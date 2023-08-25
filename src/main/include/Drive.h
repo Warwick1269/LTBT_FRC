@@ -24,7 +24,7 @@ private:
 
 	// controller declarations
 	// frc::Joystick controller{1};
-	// frc::Joystick joystick{2};
+	frc::Joystick joystick{2};
 
 	// Drive train	
 	// frc::MotorControllerGroup m_left{frontL, backL};
@@ -43,7 +43,7 @@ private:
 public:
     Drive(double joySense, double deadZone); // This is the constructor function, which is called when the class is instantiated
 	
-	void MecDrive(double joyY, double joyX, double joyZ); // Call this for MecanumDrive bases 
+	void MecDrive(); // Call this for MecanumDrive bases 
 	void TrainDrive(); // Call this for Drive Trains
 
 	// RAW FUNCTIONS for interfacing with drive base 
