@@ -29,4 +29,7 @@ class Robot : public frc::TimedRobot {
   
  private:
 
+	frc::Joystick joystick{2};
+
+	frc::Joystick controller{1};
 };

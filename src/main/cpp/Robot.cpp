@@ -30,7 +30,7 @@ void Robot::AutonomousInit()
 	Auto newAuto;
 
 
-	newAuto.TimedAutoArmBendTwo(1000, 0.1);
+	newAuto.TimedAutoArmBendTwo(3000, -0.5);
 
 	newAuto.TimedAutoIntake(2000, -0.5);
 
@@ -65,7 +65,7 @@ void Robot::TeleopPeriodic()
 	// create drive object	
 	// DeadZone, MaxSpeed
 	Drive newMec(0.02, 0.8);
-	newMec.MecDrive();
+	newMec.MecDrive(joystick.GetY(), joystick.GetX(), joystick.GetZ());
 
 	// Create new arm object
 	Arm newArm;
