@@ -88,11 +88,16 @@ void Robot::TeleopPeriodic()
 
 	// Create new arm object
 	double _leftJoy = -controller.GetRawAxis(1); 
+
+	frc::SlewRateLimiter<units::scalar> filter{0.1 / 1_s};	
+
+    double leftJoy = filter.Calculate(_leftJoy); 
+
 	double _rightJoy = controller.GetRawAxis(5);
 	int _bButton = controller.GetRawButton(2);
 
 
-    double leftPower = _leftJoy;
+    double leftPower = leftJoy;
     double rightPower = _rightJoy;
     
     if (_bButton)
