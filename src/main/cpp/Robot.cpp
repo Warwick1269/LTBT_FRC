@@ -15,11 +15,12 @@
 #include <thread>
 #include <chrono>
 
+
 #include <frc/smartdashboard/SmartDashboard.h>
 
 
 bool latch = true;
-double maxSpeed = 0.8;
+double maxSpeed = 0.5;
 double speed = 0.5;
 void Robot::RobotInit() {
 	std::cout << "-- LTBT Robot Program Start --" << std::endl;
@@ -71,16 +72,19 @@ void Robot::TeleopPeriodic()
 	// DeadZone, MaxSpeed
 	// Drive newMec(0.02, 0.8);
 	double joyYPower = joystick.GetY() * fabs(joystick.GetY());
-	double joyXPower = joystick.GetX() * fabs(joystick.GetX());
+	double joyXPower = joystick.GetX() * fabs(joystick.GetX()) * 0.15;
 	double joyZPower = joystick.GetZ() * fabs(joystick.GetZ());
 
-	frc::MecanumDrive mec_drive{frontL, backL, frontR, backR};
+	mec_drive.DriveCartesian(-joyZPower, joyYPower, joyXPower);
 
 	// Create new arm object
+	double _leftJoy = -controller.GetRawAxis(1); 
+	double _rightJoy = controller.GetRawAxis(5);
+	int _bButton = controller.GetRawButton(2);
 
 
-    double leftPower = _leftJoy * fabs(_leftJoy);
-    double rightPower = _rightJoy * fabs(_rightJoy);
+    double leftPower = _leftJoy;
+    double rightPower = _rightJoy;
     
     if (_bButton)
     {
