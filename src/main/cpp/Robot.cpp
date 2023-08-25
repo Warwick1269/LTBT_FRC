@@ -72,8 +72,17 @@ void Robot::TeleopPeriodic()
 	// DeadZone, MaxSpeed
 	// Drive newMec(0.02, 0.8);
 	double joyYPower = joystick.GetY() * fabs(joystick.GetY());
-	double joyXPower = joystick.GetX() * fabs(joystick.GetX()) * 0.15;
 	double joyZPower = joystick.GetZ() * fabs(joystick.GetZ());
+	double joyXPower;
+
+	if (joyYPower > 0.1)
+	{
+		joyXPower = joystick.GetX() * fabs(joystick.GetX()) * 0.15;
+	}
+	else
+	{
+		joyXPower = 0;
+	}
 
 	mec_drive.DriveCartesian(-joyZPower, joyYPower, joyXPower);
 

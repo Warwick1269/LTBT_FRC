@@ -101,10 +101,6 @@ void Auto::TimedAutoArmBendTwo(int timeMS, double speed)
 
 	sleep_for(milliseconds(timeMS));
 
-
-
-
-
 }
 
 void Auto::ArmStop()
