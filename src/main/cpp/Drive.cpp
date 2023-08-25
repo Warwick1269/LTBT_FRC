@@ -11,11 +11,11 @@ Drive::Drive(double deadZone, double maxSpeed)
 
 	// Set DeadZones for MecanumDrive and DriveTrain	
 	mec_drive.SetDeadband(deadZone);
-	tank_drive.SetDeadband(deadZone);
+	// tank_drive.SetDeadband(deadZone);
 	
 	// Set MaxOutput for MecanumDrive and DriveTrain
 	mec_drive.SetMaxOutput(maxSpeed);
-	tank_drive.SetMaxOutput(maxSpeed);
+	// tank_drive.SetMaxOutput(maxSpeed);
 	
 
 }
@@ -54,17 +54,17 @@ void Drive::RawMecDrive(double speedX, double speedY, double rotationZ)
 
 void Drive::RawTrainDrive(double speedL, double speedR)
 {
-	tank_drive.TankDrive(speedL, speedR, false);
+	// tank_drive.TankDrive(speedL, speedR, false);
 }
 
 void Drive::StopDrives()
 {
-	tank_drive.StopMotor();
+	// tank_drive.StopMotor();
 	mec_drive.StopMotor();
 }
 
 void Drive::SetDriveSafety(bool enabled)
 {
-	tank_drive.SetSafetyEnabled(enabled);
+	// tank_drive.SetSafetyEnabled(enabled);
 	mec_drive.SetSafetyEnabled(enabled);
 }
