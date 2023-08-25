@@ -20,16 +20,16 @@ Drive::Drive(double deadZone, double maxSpeed)
 
 }
 
-void Drive::MecDrive()
+void Drive::MecDrive(double joyY, double joyX, double joyZ)
 {
 
 	// squares joystick intensity for finer control. This is not done for mecanum drive but is automatically done for drive train
-	double joyYPower = joystick.GetY() * fabs(joystick.GetY());
-	double joyXPower = joystick.GetX() * fabs(joystick.GetX());
-	double joyZPower = joystick.GetZ() * fabs(joystick.GetZ());
+	double joyYPower = joyY * fabs(joyY);
+	double joyXPower = joyX * fabs(joyX);
+	double joyZPower = joyZ * fabs(joyZ);
 	
 	// y speed, x speed, rotation, feild orientation compensation angle
-	mec_drive.DriveCartesian(joyXPower, joyYPower, joyZPower);
+	mec_drive.DriveCartesian(joyZPower, joyYPower, joyXPower);
 	
 
 }
