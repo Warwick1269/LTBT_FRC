@@ -13,6 +13,7 @@
 
 #include <frc/Joystick.h>
 #include <frc/drive/MecanumDrive.h>
+#include <frc/filter/SlewRateLimiter.h>
 
 class Robot : public frc::TimedRobot {
  public:
