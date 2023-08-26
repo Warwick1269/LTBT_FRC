@@ -33,7 +33,7 @@ void Robot::RobotPeriodic() {}
 
 void Robot::AutonomousInit() 
 {
-	Auto newAuto;
+	// Auto newAuto;
 
 	//newAuto.TimedAutoArmBendTwo(2000, -0.4);
 
@@ -42,6 +42,20 @@ void Robot::AutonomousInit()
 	//newAuto.ArmStop();
 
 	//newAuto.TimedAutoMecDrive(10000, 0.0, -0.25, 0.0);
+    using namespace std::this_thread;
+	using namespace std::chrono;
+	// set motors fo move backwards
+	backL.Set(autoSpeed);
+	backR.Set(autoSpeed);
+	frontL.Set(autoSpeed);
+	frontR.Set(autoSpeed);
+	// sleep for 5 seconds
+	sleep_for(milliseconds(5000));
+	// set motors to stop
+	backL.Set(0);
+	backR.Set(0);
+	frontL.Set(0);
+	frontR.Set(0);
 }
 
 void Robot::AutonomousPeriodic() 
@@ -73,22 +87,23 @@ void Robot::TeleopPeriodic()
 
 	using namespace frc;
 	// create drive object	
-	// DeadZone, MaxSpeed
+	// // DeadZone, MaxSpeed
 	// Drive newMec(0.02, 0.8);
 	double joyYPower = joystick.GetY() * fabs(joystick.GetY());
 	double joyZPower = joystick.GetZ() * fabs(joystick.GetZ());
 	double joyXPower;
+	double joySliderPower = 1 - ((joystick.GetRawAxis(4) + 1) / 2);
 
 	if (fabs(joyYPower) > 0.1)
 	{
-		joyXPower = joystick.GetX() * fabs(joystick.GetX()) * 0.25;
+		joyXPower = joystick.GetX() * fabs(joystick.GetX());
 	}
 	else
 	{
 		joyXPower = 0;
 	}
 
-	mec_drive.DriveCartesian(-joyZPower * 0.5, joyYPower, joyXPower);
+	mec_drive.DriveCartesian(-joyZPower * joySliderPower * 0.5, joyYPower * joySliderPower, joyXPower * joySliderPower * 0.25);
 
 	// Create new arm object
 	double _leftJoy = -controller.GetRawAxis(1); 
