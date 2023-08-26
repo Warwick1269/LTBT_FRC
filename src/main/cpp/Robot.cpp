@@ -101,8 +101,8 @@ void Robot::TeleopPeriodic()
     }
     else
     {
-        bendOne.Set(leftPower * maxSpeed);
-        bendTwo.Set(rightPower * maxSpeed);
+        bendOne.Set(rightPower * maxSpeed);
+        bendTwo.Set(leftPower * maxSpeed);
     }
 
 
