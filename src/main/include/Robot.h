@@ -32,7 +32,7 @@ class Robot : public frc::TimedRobot {
 
 	frc::Joystick joystick{1};
 
-	frc::Joystick controller{10};
+	frc::Joystick controller{3};
  
     
 	WPI_VictorSPX frontL {4};
