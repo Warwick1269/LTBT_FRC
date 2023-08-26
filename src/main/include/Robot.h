@@ -57,12 +57,10 @@ class Robot : public frc::TimedRobot {
 	int _xButton = controller.GetRawButton(3);
 	int _yButton = controller.GetRawButton(4);
 
-	int _lBumper = controller.GetRawButton(5);
-	int _rBumper = controller.GetRawButton(6);
 
 	
 	double maxSpeed = 0.5;
 	double speed = 0.5;
 
-	frc::SlewRateLimiter<units::scalar> filter{0.7 / 1_s};	
+	frc::SlewRateLimiter<units::scalar> filter{2 / 1_s};	
 };

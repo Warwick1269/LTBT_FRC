@@ -99,12 +99,20 @@ void Robot::TeleopPeriodic()
         bendOne.Set(0);
 		bendTwo.Set(0);
     }
-    else
+    else if (joyYPower < 0.7)
     {
         bendOne.Set(rightPower * maxSpeed);
         bendTwo.Set(leftPower * maxSpeed);
     }
+	else if (joyYPower > 0.7)
+	{
+		bendOne.Set(0.2);
+		bendTwo.Set(0.2);
+	}
 
+
+	int _lBumper = controller.GetRawButton(5);
+	int _rBumper = controller.GetRawButton(6);
 
     if (_rBumper)
     {
