@@ -18,7 +18,6 @@
 
 #include <frc/smartdashboard/SmartDashboard.h>
 
-
 void Robot::RobotInit() {
 	std::cout << "-- LTBT Robot Program Start --" << std::endl;
 }
@@ -53,7 +52,9 @@ void Robot::AutonomousPeriodic()
 
 }
 
-void Robot::TeleopInit() {}
+void Robot::TeleopInit() 
+{
+}
 
 void Robot::TeleopPeriodic() 
 {
