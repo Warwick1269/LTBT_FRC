@@ -75,8 +75,8 @@ void Arm::Intake(double speed)
 
 void Arm::RawIntake(double speed)
 {
-    intake1.Set(speed);
-    intake2.Set(-speed);
+    intake1.Set(-speed);
+    intake2.Set(speed);
 }
 
 void Arm::RawBendTwo(double speed)

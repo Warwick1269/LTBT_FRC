@@ -18,19 +18,20 @@ Auto::Auto(/* args */)
 void Auto::TimedAutoTrainDrive(int timeMS, double speedL, double speedR) 
 {
 	Drive autoTrainDrive(0.02, 1);
+	autoTrainDrive.SetDriveSafety(false);
+
     
     using namespace std::this_thread;
 	using namespace std::chrono;
 
-	// // autoTrainDrive.SetSafetyEnabled(false);
-
+	
 	autoTrainDrive.RawTrainDrive(speedL, speedR);
 		
 	sleep_for(milliseconds(timeMS));
 		
     autoTrainDrive.StopDrives();
 		
-	// autoTrainDrive.SetDriveSafety(true);
+	autoTrainDrive.SetDriveSafety(true);
 }
 
 /**

@@ -14,12 +14,19 @@
 #include <frc/filter/SlewRateLimiter.h>
 #include <thread>
 #include <chrono>
+#include "cameraserver/CameraServer.h"
 
 
 #include <frc/smartdashboard/SmartDashboard.h>
 
 void Robot::RobotInit() {
 	std::cout << "-- LTBT Robot Program Start --" << std::endl;
+
+	// frc::CameraServer::StartAutomaticCapture();
+
+	// cs::CvSink cvSink = frc::CameraServer::GetVideo();
+
+	// cs::CvSource outputStream = frc::CameraServer::PutVideo("Blur", 640, 480);
 }
 
 void Robot::RobotPeriodic() {}
@@ -28,13 +35,13 @@ void Robot::AutonomousInit()
 {
 	Auto newAuto;
 
-	newAuto.TimedAutoArmBendTwo(3000, -0.5);
+	//newAuto.TimedAutoArmBendTwo(2000, -0.4);
 
-	newAuto.TimedAutoIntake(2000, -0.5);
+	//newAuto.TimedAutoIntake(2000, 0.5);
 
-	newAuto.ArmStop();
+	//newAuto.ArmStop();
 
-	newAuto.TimedAutoMecDrive(1000, 0.0, -0.2, 0.0);
+	//newAuto.TimedAutoMecDrive(10000, 0.0, -0.25, 0.0);
 }
 
 void Robot::AutonomousPeriodic() 
@@ -54,6 +61,7 @@ void Robot::AutonomousPeriodic()
 
 void Robot::TeleopInit() 
 {
+	
 }
 
 void Robot::TeleopPeriodic() 
@@ -73,14 +81,14 @@ void Robot::TeleopPeriodic()
 
 	if (fabs(joyYPower) > 0.1)
 	{
-		joyXPower = joystick.GetX() * fabs(joystick.GetX()) * 0.15;
+		joyXPower = joystick.GetX() * fabs(joystick.GetX()) * 0.25;
 	}
 	else
 	{
 		joyXPower = 0;
 	}
 
-	mec_drive.DriveCartesian(-joyZPower, joyYPower, joyXPower);
+	mec_drive.DriveCartesian(-joyZPower * 0.5, joyYPower, joyXPower);
 
 	// Create new arm object
 	double _leftJoy = -controller.GetRawAxis(1); 
@@ -92,7 +100,7 @@ void Robot::TeleopPeriodic()
 
 
     double leftPower = leftJoy;
-    double rightPower = _rightJoy;
+    double rightPower = _rightJoy * fabs(_rightJoy);
     
     if (_bButton)
     {
@@ -101,27 +109,30 @@ void Robot::TeleopPeriodic()
     }
     else if (joyYPower < 0.7)
     {
-        bendOne.Set(rightPower * maxSpeed);
-        bendTwo.Set(leftPower * maxSpeed);
+        bendOne.Set(-rightPower * maxSpeed);
+        bendTwo.Set(-leftPower * maxSpeed);
     }
 	else if (joyYPower > 0.7)
 	{
-		bendOne.Set(0.2);
-		bendTwo.Set(0.2);
+		bendOne.Set(ControlMode::PercentOutput,-0.1);
+		bendTwo.Set(ControlMode::PercentOutput,0.1); 
 	}
 
 
 	int _lBumper = controller.GetRawButton(5);
 	int _rBumper = controller.GetRawButton(6);
+	
 
     if (_rBumper)
     {
-        intake1.Set(speed);
+        speed = 0.5;
+		intake1.Set(speed);
         intake2.Set(-speed);
     }
-    if (_lBumper)
+    else if (_lBumper)
     {
-        intake1.Set(-speed);
+        speed = 0.8;
+		intake1.Set(-speed);
         intake2.Set(speed);
     }
     else
