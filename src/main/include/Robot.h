@@ -32,7 +32,7 @@ class Robot : public frc::TimedRobot {
 
 	frc::Joystick joystick{1};
 
-	frc::Joystick controller{3};
+	frc::Joystick controller{10};
  
     
 	WPI_VictorSPX frontL {4};
@@ -61,6 +61,7 @@ class Robot : public frc::TimedRobot {
 	
 	double maxSpeed = 0.65;
 	double speed = 0.55;
+	double autoSpeed = -0.5; 
 
 	frc::SlewRateLimiter<units::scalar> filter{0.9 / 1_s};	
 };
