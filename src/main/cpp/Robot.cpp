@@ -45,17 +45,13 @@ void Robot::AutonomousInit()
     using namespace std::this_thread;
 	using namespace std::chrono;
 	// set motors fo move backwards
-	backL.Set(autoSpeed);
-	backR.Set(autoSpeed);
-	frontL.Set(autoSpeed);
-	frontR.Set(autoSpeed);
+	mec_drive.SetSafetyEnabled(false);
+	mec_drive.DriveCartesian(0, -0.5, 0 );
+
 	// sleep for 5 seconds
-	sleep_for(milliseconds(5000));
-	// set motors to stop
-	backL.Set(0);
-	backR.Set(0);
-	frontL.Set(0);
-	frontR.Set(0);
+	sleep_for(milliseconds(1500));
+	mec_drive.DriveCartesian(0, 0, 0 );
+	mec_drive.SetSafetyEnabled(true);
 }
 
 void Robot::AutonomousPeriodic() 
@@ -89,21 +85,31 @@ void Robot::TeleopPeriodic()
 	// create drive object	
 	// // DeadZone, MaxSpeed
 	// Drive newMec(0.02, 0.8);
-	double joyYPower = joystick.GetY() * fabs(joystick.GetY());
-	double joyZPower = joystick.GetZ() * fabs(joystick.GetZ());
-	double joyXPower;
-	double joySliderPower = 1 - ((joystick.GetRawAxis(4) + 1) / 2);
+	// double joyYPower = joystick.GetY() * fabs(joystick.GetY());
+	// double joyZPower = joystick.GetZ() * fabs(joystick.GetZ());
+	// double joyXPower;
+	// //double joySliderPower = 1 - ((joystick.GetRawAxis(4) + 1) / 2);
 
-	if (fabs(joyYPower) > 0.1)
-	{
-		joyXPower = joystick.GetX() * fabs(joystick.GetX());
-	}
-	else
-	{
-		joyXPower = 0;
-	}
+	// if (fabs(joyYPower) > 0.1)
+	// {
+	// 	joyXPower = joystick.GetX() * fabs(joystick.GetX());
+	// }
+	// else
+	// {
+	// 	joyXPower = 0;
+	// }
 
-	mec_drive.DriveCartesian(-joyZPower * joySliderPower * 0.5, joyYPower * joySliderPower, joyXPower * joySliderPower * 0.25);
+	// mec_drive.DriveCartesian(-joyZPower * 0.65, joyYPower, joyXPower * 0);
+
+	if (std::abs(joystick.GetX()) > 0.15 )
+	{
+		// if going left, spin left wheels outer from eachother, spin right inner
+		frontL.Set(joystick.GetX());
+		backL.Set(-joystick.GetX());
+
+		backR.Set(-joystick.GetX());
+		frontL.Set(joystick.GetX());
+	}
 
 	// Create new arm object
 	double _leftJoy = -controller.GetRawAxis(1); 
