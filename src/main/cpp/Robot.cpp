@@ -18,6 +18,7 @@
 
 
 #include <frc/smartdashboard/SmartDashboard.h>
+using namespace frc;
 
 void Robot::RobotInit() {
 	std::cout << "-- LTBT Robot Program Start --" << std::endl;
@@ -81,7 +82,6 @@ void Robot::TeleopPeriodic()
 	// Teleop is already called every cycle, so use this to your advantage.
 
 
-	using namespace frc;
 	// create drive object	
 	// // DeadZone, MaxSpeed
 	// Drive newMec(0.02, 0.8);
@@ -101,66 +101,97 @@ void Robot::TeleopPeriodic()
 
 	// mec_drive.DriveCartesian(-joyZPower * 0.65, joyYPower, joyXPower * 0);
 
+	double motors [4] = {0,0,0,0};
+
 	if (std::abs(joystick.GetX()) > 0.15 )
 	{
 		// if going left, spin left wheels outer from eachother, spin right inner
-		frontL.Set(joystick.GetX());
-		backL.Set(-joystick.GetX());
+		// motors[0] += (-joystick.GetX() * fabs(joystick.GetX()) * 0.8);
+		// motors[1] += (joystick.GetX() * fabs(joystick.GetX()) * 0.8);
 
-		backR.Set(-joystick.GetX());
-		frontL.Set(joystick.GetX());
+		// motors[2] += (joystick.GetX() * fabs(joystick.GetX()) * 0.8);
+		// motors[3] += (-joystick.GetX() * fabs(joystick.GetX()) * 0.8);
 	}
+
+	if (std::abs(joystick.GetY()) > 0.15 )
+	{
+		// left
+		motors[0] += (joystick.GetY() * fabs(joystick.GetY()));
+		motors[1] += (joystick.GetY() * fabs(joystick.GetY()));
+
+		// right
+		motors[2] += (-joystick.GetY() * fabs(joystick.GetY()));
+		motors[3] += (-joystick.GetY() * fabs(joystick.GetY()));
+	}
+
+	if (std::abs(joystick.GetZ()) > 0.4 )
+	{
+		// left
+		motors[0] -= (joystick.GetZ() * fabs(joystick.GetZ()) * 0.65);
+		motors[1] -= (joystick.GetZ() * fabs(joystick.GetZ()) * 0.65);
+
+		// right
+		motors[2] -= (joystick.GetZ() * fabs(joystick.GetZ()) * 0.65);
+		motors[3] -= (joystick.GetZ() * fabs(joystick.GetZ()) * 0.65);
+	}
+
+	frontL.Set(motors[0]);
+	backL.Set(motors[1]);
+
+	backR.Set(motors[2]);
+	frontR.Set(motors[3]);
+		
 
 	// Create new arm object
-	double _leftJoy = -controller.GetRawAxis(1); 
+	// double _leftJoy = -controller.GetRawAxis(1); 
 
-    double leftJoy = filter.Calculate(_leftJoy); 
+    // double leftJoy = filter.Calculate(_leftJoy); 
 
-	double _rightJoy = controller.GetRawAxis(5);
-	int _bButton = controller.GetRawButton(2);
+	// double _rightJoy = controller.GetRawAxis(5);
+	// int _bButton = controller.GetRawButton(2);
 
 
-    double leftPower = leftJoy;
-    double rightPower = _rightJoy * fabs(_rightJoy);
+    // double leftPower = leftJoy;
+    // double rightPower = _rightJoy * fabs(_rightJoy);
     
-    if (_bButton)
-    {
-        bendOne.Set(0);
-		bendTwo.Set(0);
-    }
-    else if (joyYPower < 0.7)
-    {
-        bendOne.Set(-rightPower * maxSpeed);
-        bendTwo.Set(-leftPower * maxSpeed);
-    }
-	else if (joyYPower > 0.7)
-	{
-		bendOne.Set(ControlMode::PercentOutput,-0.1);
-		bendTwo.Set(ControlMode::PercentOutput,0.1); 
-	}
+    // if (_bButton)
+    // {
+    //     bendOne.Set(0);
+	// 	bendTwo.Set(0);
+    // }
+    // else if (joyYPower < 0.7)
+    // {
+    //     bendOne.Set(-rightPower * maxSpeed);
+    //     bendTwo.Set(-leftPower * maxSpeed);
+    // }
+	// else if (joyYPower > 0.7)
+	// {
+	// 	bendOne.Set(ControlMode::PercentOutput,-0.1);
+	// 	bendTwo.Set(ControlMode::PercentOutput,0.1); 
+	// }
 
 
-	int _lBumper = controller.GetRawButton(5);
-	int _rBumper = controller.GetRawButton(6);
+	// int _lBumper = controller.GetRawButton(5);
+	// int _rBumper = controller.GetRawButton(6);
 	
 
-    if (_rBumper)
-    {
-        speed = 0.5;
-		intake1.Set(speed);
-        intake2.Set(-speed);
-    }
-    else if (_lBumper)
-    {
-        speed = 0.8;
-		intake1.Set(-speed);
-        intake2.Set(speed);
-    }
-    else
-    {
-        intake1.Set(0);
-        intake2.Set(0);
-    }
+    // if (_rBumper)
+    // {
+    //     speed = 0.5;
+	// 	intake1.Set(speed);
+    //     intake2.Set(-speed);
+    // }
+    // else if (_lBumper)
+    // {
+    //     speed = 0.8;
+	// 	intake1.Set(-speed);
+    //     intake2.Set(speed);
+    // }
+    // else
+    // {
+    //     intake1.Set(0);
+    //     intake2.Set(0);
+    // }
 
 }
 

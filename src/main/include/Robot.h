@@ -32,18 +32,18 @@ class Robot : public frc::TimedRobot {
 
 	frc::Joystick joystick{1};
 
-	frc::Joystick controller{10};
+	frc::Joystick controller{3};
  
     
 	WPI_VictorSPX frontL {4};
-	WPI_VictorSPX backL {5};
+	WPI_VictorSPX backR {5};
 
 
 	// Right
 	WPI_VictorSPX frontR {3};
-	WPI_VictorSPX backR {2};
+	WPI_VictorSPX backL {2};
 
-	frc::MecanumDrive mec_drive{frontL, backL, frontR, backR};
+	frc::MecanumDrive mec_drive{frontL, backR, frontR, backL};
 
 	WPI_VictorSPX bendOne {6};
 	WPI_VictorSPX bendTwo {1};
