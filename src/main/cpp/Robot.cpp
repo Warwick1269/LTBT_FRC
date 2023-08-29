@@ -106,14 +106,14 @@ void Robot::TeleopPeriodic()
 	if (std::abs(joystick.GetX()) > 0.15 )
 	{
 		// if going left, spin left wheels outer from eachother, spin right inner
-		// motors[0] += (-joystick.GetX() * fabs(joystick.GetX()) * 0.8);
-		// motors[1] += (joystick.GetX() * fabs(joystick.GetX()) * 0.8);
+		motors[0] += (-joystick.GetX() * fabs(joystick.GetX()) * 0.8);
+		motors[1] += (joystick.GetX() * fabs(joystick.GetX()) * 0.8);
 
-		// motors[2] += (joystick.GetX() * fabs(joystick.GetX()) * 0.8);
-		// motors[3] += (-joystick.GetX() * fabs(joystick.GetX()) * 0.8);
+		motors[2] += (joystick.GetX() * fabs(joystick.GetX()) * 0.8);
+		motors[3] += (-joystick.GetX() * fabs(joystick.GetX()) * 0.8);
 	}
 
-	if (std::abs(joystick.GetY()) > 0.15 )
+	if (std::abs(joystick.GetY()) > 0.2 )
 	{
 		// left
 		motors[0] += (joystick.GetY() * fabs(joystick.GetY()));
@@ -135,11 +135,11 @@ void Robot::TeleopPeriodic()
 		motors[3] -= (joystick.GetZ() * fabs(joystick.GetZ()) * 0.65);
 	}
 
-	frontL.Set(motors[0]);
-	backL.Set(motors[1]);
+	frontL.Set(motors[0] * reducedSpeed);
+	backL.Set(motors[1] * reducedSpeed);
 
-	backR.Set(motors[2]);
-	frontR.Set(motors[3]);
+	backR.Set(motors[2] * reducedSpeed);
+	frontR.Set(motors[3] * reducedSpeed);
 		
 
 	// Create new arm object
